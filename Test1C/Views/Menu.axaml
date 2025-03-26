@@ -6,5 +6,17 @@
              x:Class="Test1C.Menu"
 			 xmlns:vm="using:Test1C.ViewModels"
 			 x:DataType="vm:MenuViewModel">
-  Welcome to vieeeeee!
+
+	<Grid Margin="70 30">
+		<Border BorderBrush="#30267D" BorderThickness="5" CornerRadius="20">
+			<StackPanel>
+				<Image Source="avares://Test1C/Assets/icon.png" Height="170"/>
+				<Button Command="" Content="Билеты" />
+				<Button Command="" Content="Ошибки" />
+				<Button Command="" Content="Марафон" />
+				<Button Command="" Content="Экзамен" Background="#302679" Foreground="White"/>
+			</StackPanel>
+		</Border>
+	</Grid>
+	 
 </UserControl>
