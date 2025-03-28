@@ -11,10 +11,10 @@
 		<Border BorderBrush="#30267D" BorderThickness="5" CornerRadius="20">
 			<StackPanel>
 				<Image Source="avares://Test1C/Assets/icon.png" Height="170"/>
-				<Button Command="" Content="Билеты" />
-				<Button Command="" Content="Ошибки" />
-				<Button Command="" Content="Марафон" />
-				<Button Command="" Content="Экзамен" Background="#302679" Foreground="White"/>
+				<Button Command="{Binding GoTems}" Content="Билеты" />
+				<Button Command="{Binding GoErrors}" Content="Ошибки" />
+				<Button Command="{Binding GoMarathon}" Content="Марафон" />
+				<Button Command="{Binding GoExam}" Content="Экзамен" Background="#302679" Foreground="White"/>
 			</StackPanel>
 		</Border>
 	</Grid>

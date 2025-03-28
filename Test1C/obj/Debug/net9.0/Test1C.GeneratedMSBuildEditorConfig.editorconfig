@@ -24,6 +24,12 @@ build_property.EnableCodeStyleSeverity =
 [C:/Users/user/source/repos/Test1C/Test1C/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[C:/Users/user/source/repos/Test1C/Test1C/Views/ListQuestions.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/Users/user/source/repos/Test1C/Test1C/Views/ListTicket.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [C:/Users/user/source/repos/Test1C/Test1C/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
