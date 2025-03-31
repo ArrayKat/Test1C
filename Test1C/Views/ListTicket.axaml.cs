@@ -1,15 +1,17 @@
+using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Test1C.Models;
 using Test1C.ViewModels;
 
 namespace Test1C;
 
 public partial class ListTicket : UserControl
 {
-    public ListTicket()
+    public ListTicket(List<Ticket> ListTicket, string title, string desc)
     {
         InitializeComponent();
-        DataContext = new ListTicketViewModel();
+        DataContext = new ListTicketViewModel(ListTicket, title, desc);
     }
 }

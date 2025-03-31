@@ -4,6 +4,7 @@ using System.Formats.Asn1;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CsvHelper;
@@ -13,73 +14,63 @@ using Test1C.Models;
 
 namespace Test1C.ViewModels
 {
-    public class ListQuestionsViewModel: ViewModelBase
+    public class ListQuestionsViewModel : ViewModelBase
     {
+        string _title;
+        string _description;
+        List<Ticket> _listTicket;
+
+
         List<QuestionModel> _questions;
         public List<QuestionModel> Questions { get => _questions; set => this.RaiseAndSetIfChanged(ref _questions, value); }
-        public ListQuestionsViewModel() {
-            string filePath = "File/read1.csv";
-            Questions = ParseQuestions(filePath);
-        }
-
         
 
-        static List<QuestionModel> ParseQuestions(string filePath)
+        List<int> numberQuestion;
+        public List<int> NumberQuestion { get => numberQuestion; set => numberQuestion = value; }
+
+        // Новые свойства для синхронизации
+        private int _selectedNumber;
+        public int SelectedNumber
         {
-            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                Delimiter = ";",
-                HasHeaderRecord = false,
-                BadDataFound = null,
-                Mode = CsvMode.RFC4180,
-                Quote = '"',
-                TrimOptions = TrimOptions.Trim
-            };
+            get => _selectedNumber;
+            set => this.RaiseAndSetIfChanged(ref _selectedNumber, value);
+        }
 
-            var questions = new List<QuestionModel>();
+        private QuestionModel _selectedQuestion;
+        public QuestionModel SelectedQuestion
+        {
+            get => _selectedQuestion;
+            set => this.RaiseAndSetIfChanged(ref _selectedQuestion, value);
+        }
 
-            using (var reader = new StreamReader(filePath))
-            using (var csv = new CsvReader(reader, config))
-            {
-                while (csv.Read())
+
+        public ListQuestionsViewModel(List<Ticket> list, string title, string desc, List<QuestionModel> question) {
+            _listTicket = list;
+            _description = desc;
+            _title = title;
+
+            Questions = question;
+            NumberQuestion = Questions.Select(q => q.QuestionNumber).ToList();
+
+            // Синхронизация при изменении SelectedNumber
+            this.WhenAnyValue(x => x.SelectedNumber)
+                .Where(number => number > 0)
+                .Subscribe(number =>
                 {
-                    try
-                    {
-                        var record = csv.Parser.Record;
-                        if (record == null || record.Length < 5) continue;
+                    SelectedQuestion = Questions.FirstOrDefault(q => q.QuestionNumber == number);
+                });
 
+            // Обратная синхронизация при изменении SelectedQuestion
+            this.WhenAnyValue(x => x.SelectedQuestion)
+                .Where(question => question != null)
+                .Subscribe(question =>
+                {
+                    SelectedNumber = question.QuestionNumber;
+                });
+        }
 
-
-
-                        var question = new QuestionModel
-                        {
-                            TicketNumber = int.Parse(record[0]),
-                            QuestionNumber = int.Parse(record[1]),
-                            CorrectAnswer = int.Parse(record[2]),
-                            ImagePath = record[3] == "null" ? null : record[3],
-                            QuestionText = record[4].Replace("«", "<").Replace("»", ">"),
-                            Answers = new List<string>()
-                        };
-
-                        // Добавляем ответы (начиная с 5 поля)
-                        for (int i = 5; i < record.Length; i++)
-                        {
-                            if (!string.IsNullOrWhiteSpace(record[i]))
-                            {
-                                question.Answers.Add(record[i].Trim());
-                            }
-                        }
-
-                        questions.Add(question);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Ошибка обработки строки {csv.Parser.Row}: {ex.Message}");
-                    }
-                }
-            }
-
-            return questions;
+        public void GoBack() {
+            MainWindowViewModel.Instance.PageContent = new ListTicket(_listTicket, _title, _description);
         }
 
     }

@@ -8,6 +8,7 @@ namespace Test1C.Models
 {
     public class Ticket
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public string QuestionCount { get; set; }
     }
