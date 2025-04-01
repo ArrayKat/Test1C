@@ -31,12 +31,26 @@
 			<ListBox ItemsSource="{Binding Questions}" SelectedItem="{Binding SelectedQuestion}" Grid.Row="1">
 				<ListBox.ItemTemplate>
 					<DataTemplate>
-						<StackPanel>
-							<TextBlock Text="{Binding QuestionText}"/>
-						</StackPanel>
+						<Border Background="" BorderBrush="" BorderThickness="" CornerRadius="7">
+							<StackPanel>
+								<TextBlock Text="{Binding QuestionText}"/>
+
+								<ItemsRepeater ItemsSource="{Binding Answers}">
+									<ItemsRepeater.ItemTemplate>
+										<DataTemplate>
+											<RadioButton GroupName="{Binding QuestionGroupe}" Content="{Binding TextAns}"/>
+										</DataTemplate>
+									</ItemsRepeater.ItemTemplate>
+								</ItemsRepeater>
+								
+								<Button Command="" Content="Проверить"/>
+							</StackPanel>
+						</Border>
 					</DataTemplate>
 				</ListBox.ItemTemplate>
 			</ListBox>
+			
+			
 		</Grid>
 	</Grid>
 	

@@ -13,7 +13,8 @@ namespace Test1C.Models
         public int CorrectAnswer { get; set; }      // Номер правильного ответа (5)
         public string? ImagePath { get; set; }      // Путь к картинке (null)
         public string QuestionText { get; set; }    // Текст вопроса
-        public List<string> Answers { get; set; }   // Список ответов
+        public List<Ansver> Answers { get; set; }   // Список ответов
 
+       
     }
 }

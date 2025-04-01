@@ -20,8 +20,6 @@ namespace Test1C.ViewModels
         public List<Ticket> ListTickets { get => listTicket; set => this.RaiseAndSetIfChanged(ref listTicket, value); }
 
 
-        
-
         public void GoMarathon() {
             _questions = ParseQuestions("File/read1.csv");
             MainWindowViewModel.Instance.PageContent = new ListQuestions(null, null, null, _questions);
@@ -103,7 +101,7 @@ namespace Test1C.ViewModels
                             CorrectAnswer = int.Parse(record[2]),
                             ImagePath = record[3] == "null" ? null : record[3],
                             QuestionText = record[4].Replace("«", "<").Replace("»", ">"),
-                            Answers = new List<string>()
+                            Answers = new List<Ansver>()
                         };
 
                         // Добавляем ответы (начиная с 5 поля)
@@ -111,7 +109,12 @@ namespace Test1C.ViewModels
                         {
                             if (!string.IsNullOrWhiteSpace(record[i]))
                             {
-                                question.Answers.Add(record[i].Trim());
+                                Ansver tmp = new Ansver()
+                                {
+                                    Number = i - 4,
+                                    TextAns = record[i].Trim()
+                                };
+                                question.Answers.Add(tmp);
                             }
                         }
 

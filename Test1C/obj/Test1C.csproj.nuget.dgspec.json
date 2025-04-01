@@ -54,6 +54,10 @@
               "target": "Package",
               "version": "[11.2.1, )"
             },
+            "Avalonia.Controls.ItemsRepeater": {
+              "target": "Package",
+              "version": "[11.1.5, )"
+            },
             "Avalonia.Desktop": {
               "target": "Package",
               "version": "[11.2.1, )"

@@ -42,12 +42,11 @@ namespace Test1C.ViewModels
         }
 
         public void GoQuestion() {
-            Questions = ParseQuestions("File/read1.csv");
-            Questions = Questions.Where(x=>x.TicketNumber == SelectedItem.Id).ToList();
+            Questions = ParseQuestionsTicket("File/read1.csv", SelectedItem.Id);
             MainWindowViewModel.Instance.PageContent = new ListQuestions(ListTicket, Title, Description, Questions);
         }
 
-        static List<QuestionModel> ParseQuestions(string filePath)
+        static List<QuestionModel> ParseQuestionsTicket(string filePath, int idTicket)
         {
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
@@ -78,7 +77,7 @@ namespace Test1C.ViewModels
                             CorrectAnswer = int.Parse(record[2]),
                             ImagePath = record[3] == "null" ? null : record[3],
                             QuestionText = record[4].Replace("«", "<").Replace("»", ">"),
-                            Answers = new List<string>()
+                            Answers = new List<Ansver>()
                         };
 
                         // Добавляем ответы (начиная с 5 поля)
@@ -86,7 +85,13 @@ namespace Test1C.ViewModels
                         {
                             if (!string.IsNullOrWhiteSpace(record[i]))
                             {
-                                question.Answers.Add(record[i].Trim());
+                                Ansver tmp = new Ansver()
+                                {
+                                    Number = i - 4,
+                                    TextAns = record[i].Trim(),
+                                    QuestionGroupe = $"{record[0]}-{record[1]}"
+                                };
+                                question.Answers.Add(tmp);
                             }
                         }
 
@@ -98,10 +103,8 @@ namespace Test1C.ViewModels
                     }
                 }
             }
+            questions = questions.Where(x => x.TicketNumber == idTicket).ToList();
             return questions;
         }
-
-    
-
     }
 }

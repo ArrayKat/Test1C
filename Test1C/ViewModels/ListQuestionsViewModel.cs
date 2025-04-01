@@ -4,6 +4,7 @@ using System.Formats.Asn1;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,28 +24,9 @@ namespace Test1C.ViewModels
 
         List<QuestionModel> _questions;
         public List<QuestionModel> Questions { get => _questions; set => this.RaiseAndSetIfChanged(ref _questions, value); }
-        
 
-        List<int> numberQuestion;
-        public List<int> NumberQuestion { get => numberQuestion; set => numberQuestion = value; }
-
-        // Новые свойства для синхронизации
-        private int _selectedNumber;
-        public int SelectedNumber
+        public ListQuestionsViewModel(List<Ticket> list, string title, string desc, List<QuestionModel> question)
         {
-            get => _selectedNumber;
-            set => this.RaiseAndSetIfChanged(ref _selectedNumber, value);
-        }
-
-        private QuestionModel _selectedQuestion;
-        public QuestionModel SelectedQuestion
-        {
-            get => _selectedQuestion;
-            set => this.RaiseAndSetIfChanged(ref _selectedQuestion, value);
-        }
-
-
-        public ListQuestionsViewModel(List<Ticket> list, string title, string desc, List<QuestionModel> question) {
             _listTicket = list;
             _description = desc;
             _title = title;
@@ -67,11 +49,43 @@ namespace Test1C.ViewModels
                 {
                     SelectedNumber = question.QuestionNumber;
                 });
+
+            CheckAnswerCommand = ReactiveCommand.Create<QuestionModel>(question =>
+            {
+                // Здесь логика проверки ответа
+                // question - текущий выбранный вопрос
+            });
         }
+
+        List<int> numberQuestion;
+        public List<int> NumberQuestion { get => numberQuestion; set => numberQuestion = value; }
+
+        // Новые свойства для синхронизации
+        private int _selectedNumber;
+        public int SelectedNumber
+        {
+            get => _selectedNumber;
+            set => this.RaiseAndSetIfChanged(ref _selectedNumber, value);
+        }
+
+        private QuestionModel _selectedQuestion;
+        public QuestionModel SelectedQuestion
+        {
+            get => _selectedQuestion;
+            set => this.RaiseAndSetIfChanged(ref _selectedQuestion, value);
+        }
+
+        
+
+        
 
         public void GoBack() {
             MainWindowViewModel.Instance.PageContent = new ListTicket(_listTicket, _title, _description);
         }
 
+        public void checkAnsvers() { 
+        
+        }
+      
     }
 }
