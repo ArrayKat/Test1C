@@ -72,3 +72,5 @@ C:\Users\user\source\repos\Test1C\Test1C\obj\Debug\net9.0\ref\Test1C.dll
 C:\Users\user\source\repos\Test1C\Test1C\obj\Debug\net9.0\Test1C.sourcelink.json
 C:\Users\user\source\repos\Test1C\Test1C\bin\Debug\net9.0\CsvHelper.dll
 C:\Users\user\source\repos\Test1C\Test1C\bin\Debug\net9.0\Avalonia.Controls.ItemsRepeater.dll
+C:\Users\user\source\repos\Test1C\Test1C\bin\Debug\net9.0\DialogHost.Avalonia.dll
+C:\Users\user\source\repos\Test1C\Test1C\bin\Debug\net9.0\MsBox.Avalonia.dll

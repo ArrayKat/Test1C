@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using CsvHelper;
 using CsvHelper.Configuration;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
 using ReactiveUI;
 using Test1C.Models;
 
@@ -50,15 +52,11 @@ namespace Test1C.ViewModels
                     SelectedNumber = question.QuestionNumber;
                 });
 
-            CheckAnswerCommand = ReactiveCommand.Create<QuestionModel>(question =>
-            {
-                // Здесь логика проверки ответа
-                // question - текущий выбранный вопрос
-            });
+           
         }
 
         List<int> numberQuestion;
-        public List<int> NumberQuestion { get => numberQuestion; set => numberQuestion = value; }
+        public List<int> NumberQuestion { get => numberQuestion; set => this.RaiseAndSetIfChanged(ref numberQuestion, value); }
 
         // Новые свойства для синхронизации
         private int _selectedNumber;
@@ -74,17 +72,22 @@ namespace Test1C.ViewModels
             get => _selectedQuestion;
             set => this.RaiseAndSetIfChanged(ref _selectedQuestion, value);
         }
-
         
 
-        
+        string textResult;
+        public string TextResult { get => textResult; set => textResult = value; }
 
         public void GoBack() {
             MainWindowViewModel.Instance.PageContent = new ListTicket(_listTicket, _title, _description);
         }
 
-        public void checkAnsvers() { 
-        
+        public void CheckAnsvers(QuestionModel quest) {
+            
+
+            Ansver ansverChecked = quest.Answers.FirstOrDefault(x => x.IsChecked == true);
+
+            TextResult =  quest.CorrectAnswer == ansverChecked.Number ?  "✓ Правильно" : "✗ Неправильно";
+            MessageBoxManager.GetMessageBoxStandard("Сообщение", TextResult, ButtonEnum.Ok).ShowAsync();
         }
       
     }

@@ -38,12 +38,12 @@
 								<ItemsRepeater ItemsSource="{Binding Answers}">
 									<ItemsRepeater.ItemTemplate>
 										<DataTemplate>
-											<RadioButton GroupName="{Binding QuestionGroupe}" Content="{Binding TextAns}"/>
+											<RadioButton GroupName="{Binding QuestionGroupe}" Content="{Binding TextAns}" IsChecked="{Binding IsChecked}"/>
 										</DataTemplate>
 									</ItemsRepeater.ItemTemplate>
 								</ItemsRepeater>
 								
-								<Button Command="" Content="Проверить"/>
+								<Button Content="Проверить" Command="{Binding $parent[UserControl].((vm:ListQuestionsViewModel)DataContext).CheckAnsvers}" CommandParameter="{Binding}"/>
 							</StackPanel>
 						</Border>
 					</DataTemplate>

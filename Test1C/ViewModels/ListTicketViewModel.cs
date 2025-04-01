@@ -89,7 +89,8 @@ namespace Test1C.ViewModels
                                 {
                                     Number = i - 4,
                                     TextAns = record[i].Trim(),
-                                    QuestionGroupe = $"{record[0]}-{record[1]}"
+                                    QuestionGroupe = $"{record[0]}-{record[1]}",
+                                    IsChecked = false
                                 };
                                 question.Answers.Add(tmp);
                             }

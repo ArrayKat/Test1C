@@ -11,6 +11,7 @@ namespace Test1C.Models
         public int Number { get; set; }
         public string TextAns { get; set; }
         public string QuestionGroupe { get; set; }
+        public bool IsChecked { get; set; }
         
     }
 }
