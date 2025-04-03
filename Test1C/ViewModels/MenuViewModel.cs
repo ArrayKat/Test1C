@@ -101,7 +101,7 @@ namespace Test1C.ViewModels
                             CorrectAnswer = int.Parse(record[2]),
                             ImagePath = record[3] == "null" ? null : record[3],
                             QuestionText = record[4].Replace("«", "<").Replace("»", ">"),
-                            Answers = new List<Ansver>()
+                            Answers = new List<Answer>()
                         };
 
                         // Добавляем ответы (начиная с 5 поля)
@@ -109,7 +109,7 @@ namespace Test1C.ViewModels
                         {
                             if (!string.IsNullOrWhiteSpace(record[i]))
                             {
-                                Ansver tmp = new Ansver()
+                                Answer tmp = new Answer()
                                 {
                                     Number = i - 4,
                                     TextAns = record[i].Trim()

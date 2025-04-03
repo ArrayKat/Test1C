@@ -7,6 +7,7 @@
 			 xmlns:vm="using:Test1C.ViewModels"
 			 x:DataType="vm:ListQuestionsViewModel">
 
+	
 	<Grid ColumnDefinitions="*, 10*">
 		<ListBox ItemsSource="{Binding NumberQuestion}" SelectedItem="{Binding SelectedNumber}" Grid.Column="0"/>
 		
@@ -28,22 +29,27 @@
 				</Border>
 			</StackPanel>
 
-			<ListBox ItemsSource="{Binding Questions}" SelectedItem="{Binding SelectedQuestion}" Grid.Row="1">
+			<ListBox ItemsSource="{Binding Questions}"
+				 SelectedItem="{Binding SelectedQuestion}"
+				 ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="1">
 				<ListBox.ItemTemplate>
 					<DataTemplate>
-						<Border Background="" BorderBrush="" BorderThickness="" CornerRadius="7">
-							<StackPanel>
-								<TextBlock Text="{Binding QuestionText}"/>
+						<Border Background="#F99D20" BorderBrush="{Binding ColorBorder}" BorderThickness="4" CornerRadius="7" >
+							<StackPanel Margin="10">
+								<TextBlock Text="{Binding QuestionText}" Margin="10"/>
 
-								<ItemsRepeater ItemsSource="{Binding Answers}">
-									<ItemsRepeater.ItemTemplate>
+								<ItemsControl  ItemsSource="{Binding Answers}">
+									<ItemsControl.ItemTemplate>
 										<DataTemplate>
-											<RadioButton GroupName="{Binding QuestionGroupe}" Content="{Binding TextAns}" IsChecked="{Binding IsChecked}"/>
+											<RadioButton Foreground="Black" GroupName="{Binding QuestionGroupe}" Content="{Binding TextAns}" IsChecked="{Binding IsChecked}"/>
 										</DataTemplate>
-									</ItemsRepeater.ItemTemplate>
-								</ItemsRepeater>
-								
-								<Button Content="Проверить" Command="{Binding $parent[UserControl].((vm:ListQuestionsViewModel)DataContext).CheckAnsvers}" CommandParameter="{Binding}"/>
+									</ItemsControl.ItemTemplate>
+								</ItemsControl >
+
+								<Grid ColumnDefinitions="5*, *">
+									<Button Content="Проверить" Command="{Binding $parent[UserControl].((vm:ListQuestionsViewModel)DataContext).CheckAnswers}" CommandParameter="{Binding}" Classes="check" Grid.Column="0"/>
+									<TextBlock Text="{Binding CorrectAnswer, StringFormat='Правильный ответ: {0}'}" IsVisible="{Binding IsVisibleCorrectAnswer}" FontWeight="Bold" HorizontalAlignment="Right" Margin="17" Grid.Column="1"/>
+								</Grid>
 							</StackPanel>
 						</Border>
 					</DataTemplate>

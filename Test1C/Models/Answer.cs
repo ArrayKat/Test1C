@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Test1C.Models
 {
-    public class Ansver
+    public class Answer
     {
         public int Number { get; set; }
         public string TextAns { get; set; }
