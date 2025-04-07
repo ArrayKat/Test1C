@@ -9,9 +9,9 @@ namespace Test1C;
 
 public partial class ListTicket : UserControl
 {
-    public ListTicket(List<Ticket> ListTicket, string title, string desc)
+    public ListTicket(List<Ticket> ListTicket, string title, string desc, string filePath)
     {
         InitializeComponent();
-        DataContext = new ListTicketViewModel(ListTicket, title, desc);
+        DataContext = new ListTicketViewModel(ListTicket, title, desc, filePath);
     }
 }

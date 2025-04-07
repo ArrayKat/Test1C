@@ -22,21 +22,38 @@ namespace Test1C.ViewModels
 
         public void GoMarathon() {
             _questions = ParseQuestions("File/read1.csv");
-            MainWindowViewModel.Instance.PageContent = new ListQuestions(null, null, null, _questions);
+            MainWindowViewModel.Instance.PageContent = new ListQuestions(null, null, null, _questions, "File/read1.csv");
         }
         public void GoTems() {
             ParceFromTeme("File/Tems.txt");
             ListTickets.RemoveAt(0);
-            MainWindowViewModel.Instance.PageContent = new ListTicket(ListTickets, "Тренировка по темам", "Ваша цель - все темы должны стать пройденными на 100%");
+            MainWindowViewModel.Instance.PageContent = new ListTicket(ListTickets, "Тренировка по темам", "Ваша цель - все темы должны стать пройденными на 100%", "File/read1.csv");
         }
         public void GoErrors()
         {
-            //MainWindowViewModel.Instance.PageContent = new ListTicket();
+            ParceFromTeme("File/Tems.txt");
+            // 1. Получаем список всех вопросов из файла
+            List<QuestionModel> list = ParseQuestions("File/errors.csv");
+
+            // 2. Выбираем уникальные номера билетов
+            List<int> uniqueTicketNumbers = list
+                .GroupBy(q => q.TicketNumber)
+                .Select(g => g.Key)
+                .ToList();
+
+          
+
+            // 4. Оставляем только билеты с уникальными номерами
+            ListTickets = ListTickets
+                .Where(ticket => uniqueTicketNumbers.Contains(ticket.Id)) // предполагая, что ticket.Id соответствует TicketNumber
+                .ToList();
+
+            MainWindowViewModel.Instance.PageContent = new ListTicket(ListTickets, "Тренировка по темам", "Ваша цель - все темы должны стать пройденными на 100%", "File/errors.csv");
         }
         public void GoExam()
         {
             ParceFromTeme("File/Tems.txt");
-            MainWindowViewModel.Instance.PageContent = new ListTicket(ListTickets, "Экзавмен", "Ваша цель - пройти тест из 14 вопросов");
+            MainWindowViewModel.Instance.PageContent = new ListTicket(ListTickets, "Экзавмен", "Ваша цель - пройти тест из 14 вопросов", "File/read1.csv");
         }
 
 

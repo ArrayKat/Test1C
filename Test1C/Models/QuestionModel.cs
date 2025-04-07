@@ -8,7 +8,7 @@ using Test1C.ViewModels;
 
 namespace Test1C.Models
 {
-    public partial class QuestionModel: ViewModelBase
+    public partial class QuestionModel
     {
         public int TicketNumber { get; set; }       // Номер билета (1)
         public int QuestionNumber { get; set; }    // Номер вопроса в билете (1)

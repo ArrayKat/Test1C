@@ -12,6 +12,8 @@ namespace Test1C.ViewModels
     {
         private readonly QuestionModel _model;
 
+        public QuestionModel Model => _model;
+
         public QuestionViewModel(QuestionModel model)
         {
             _model = model;
@@ -23,7 +25,7 @@ namespace Test1C.ViewModels
         public string QuestionText => _model.QuestionText;
         public List<Answer> Answers => _model.Answers;
         public int CorrectAnswer => _model.CorrectAnswer;
-
+        public string ImagePath => _model.ImagePath;
         // UI-специфичные свойства
         private bool _isVisibleCorrectAnswer;
         public bool IsVisibleCorrectAnswer
