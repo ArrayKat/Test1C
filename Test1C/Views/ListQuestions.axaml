@@ -5,15 +5,19 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Test1C.ListQuestions"
 			 xmlns:vm="using:Test1C.ViewModels"
-			 x:DataType="vm:ListQuestionsViewModel">
-
+			 x:DataType="vm:ListQuestionsViewModel"
+			 xmlns:image ="using:Test1C.Converter">
+	
+	<UserControl.Resources>
+		<image:ImageConverter x:Key="ImageConv"></image:ImageConverter>
+	</UserControl.Resources>
 	
 	<Grid ColumnDefinitions="*, 10*">
 		<ListBox ItemsSource="{Binding NumberQuestion}" SelectedItem="{Binding SelectedNumber}" Grid.Column="0"/>
 		
 		<Grid RowDefinitions="*, 7*" Margin="20" HorizontalAlignment="Center" Grid.Column="1">
 			<StackPanel Grid.Row="0" Orientation="Horizontal">
-				<Button Command="{Binding GoBack}" Width="30" Height="60" CornerRadius="7" Background="#30267D" BorderThickness="0" HorizontalAlignment="Left" >
+				<Button Command="{Binding GoBack}"  Width="30" Height="60" CornerRadius="7" Background="#30267D" BorderThickness="0" HorizontalAlignment="Left" >
 					<Button.Content>
 						<Image Source="avares://Test1C/Assets/BtnBack.png" Width="24" Height="24"/>
 					</Button.Content>
@@ -27,7 +31,7 @@
 						</StackPanel>
 					</StackPanel>
 				</Border>
-				<Button Command="{Binding GoBack}" Width="30" Height="60" CornerRadius="7" Background="#30267D" BorderThickness="0" HorizontalAlignment="Stretch" >
+				<Button Command="{Binding DelAllQuestion}" IsVisible="{Binding IsVisibleDel}"  Width="30" Height="60" CornerRadius="7" Background="#30267D" BorderThickness="0" HorizontalAlignment="Stretch" >
 					<Button.Content>
 						<Image Source="avares://Test1C/Assets/BtnDelAll.png" Width="24" Height="24"/>
 					</Button.Content>
@@ -43,16 +47,18 @@
 							<StackPanel Margin="10">
 								
 								<Grid ColumnDefinitions="5*, *">
-									<StackPanel Orientation="Horizontal" Margin="10" Grid.Column="0">
+									<StackPanel Orientation="Horizontal" Margin="10" Grid.Column="0" >
 										<TextBlock Text="{Binding QuestionNumber, StringFormat=' {0}. '}" FontWeight="Bold"/>
-										<TextBlock Text="{Binding QuestionText}"  FontWeight="Bold"/>
+										<TextBlock Text="{Binding QuestionText}"  FontWeight="Bold" TextWrapping="Wrap" MaxWidth="700"/>
 									</StackPanel>
-									<Button Grid.Column="1" Command="" Width="30" Height="60" HorizontalAlignment="Right"  VerticalAlignment="Top">
+									<Button Command="{Binding $parent[UserControl].((vm:ListQuestionsViewModel)DataContext).DelQuestions}" CommandParameter="{Binding}" IsVisible="{Binding $parent[UserControl].((vm:ListQuestionsViewModel)DataContext).IsVisibleDel}" Grid.Column="1" Width="30" Height="60" HorizontalAlignment="Right"  VerticalAlignment="Top">
 										<Button.Content>
 											<Image Source="avares://Test1C/Assets/BtnClose.png" Width="24" Height="24"/>
 										</Button.Content>
 									</Button>
 								</Grid>
+								
+								<Image Source="{Binding ImagePath, Converter={StaticResource ImageConv}}" Height="300" IsVisible="{Binding ImagePath, Converter={x:Static ObjectConverters.IsNotNull}}"/>
 								
 								<ItemsControl  ItemsSource="{Binding Answers}">
 									<ItemsControl.ItemTemplate>

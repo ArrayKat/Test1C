@@ -15,6 +15,7 @@ namespace Test1C.ViewModels
     internal class ListTicketViewModel:ViewModelBase
     {
         string _filePath;
+        string _pathView;
         List<Ticket> listTicket;
         public List<Ticket> ListTicket { get => listTicket; set => this.RaiseAndSetIfChanged( ref listTicket, value); }
         
@@ -31,11 +32,12 @@ namespace Test1C.ViewModels
         string _description;
         public string Description { get => _description; set => this.RaiseAndSetIfChanged(ref _description, value); }
 
-        public ListTicketViewModel(List<Ticket> list,string title, string desc, string filePath) {
+        public ListTicketViewModel(List<Ticket> list,string title, string desc, string filePath, string pathView) {
             ListTicket = list;
             Title = title;
             Description = desc;
             _filePath = filePath;
+            _pathView = pathView;
         }
 
         public void GoBack() {
@@ -44,7 +46,7 @@ namespace Test1C.ViewModels
 
         public void GoQuestion() {
             Questions = ParseQuestionsTicket(_filePath, SelectedItem.Id);
-            MainWindowViewModel.Instance.PageContent = new ListQuestions(ListTicket, Title, Description, Questions, _filePath);
+            MainWindowViewModel.Instance.PageContent = new ListQuestions(ListTicket, Title, Description, Questions, _filePath, _pathView);
         }
 
         static List<QuestionModel> ParseQuestionsTicket(string filePath, int idTicket)

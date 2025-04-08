@@ -26,9 +26,10 @@ namespace Test1C.ViewModels
         private readonly string _description;
         private readonly List<Ticket> _listTicket;
         private readonly string _filePath;
+        string _pathView;
 
         public ObservableCollection<QuestionViewModel> Questions { get; }
-        public List<int> NumberQuestion { get; }
+        public ObservableCollection<int> NumberQuestion { get; }
 
         private int _selectedNumber;
         public int SelectedNumber
@@ -51,18 +52,21 @@ namespace Test1C.ViewModels
             set => this.RaiseAndSetIfChanged(ref _textResult, value);
         }
 
+        bool _isVisibleDel;
+        public bool IsVisibleDel { get => _isVisibleDel; set => this.RaiseAndSetIfChanged(ref _isVisibleDel, value); }
         public ReactiveCommand<QuestionViewModel, Unit> CheckAnswersCommand { get; }
 
-        public ListQuestionsViewModel(List<Ticket> list, string title, string desc, List<QuestionModel> questions, string filePath)
+        public ListQuestionsViewModel(List<Ticket> list, string title, string desc, List<QuestionModel> questions, string filePath, string path)
         {
             _listTicket = list;
             _description = desc;
             _title = title;
             _filePath = filePath;
-            Questions = new ObservableCollection<QuestionViewModel>(
-                questions.Select(q => new QuestionViewModel(q)));
+            _pathView = path;
+            Questions = new ObservableCollection<QuestionViewModel>(questions.Select(q => new QuestionViewModel(q)).OrderBy(x => x.QuestionNumber));
+            IsVisibleDel = path == "error" ? true : false;
 
-            NumberQuestion = questions.Select(q => q.QuestionNumber).ToList();
+            NumberQuestion = new ObservableCollection<int>(Questions.Select(q => q.QuestionNumber));
             CheckAnswersCommand = ReactiveCommand.Create<QuestionViewModel>(CheckAnswers);
 
             // Синхронизация выбранного элемента
@@ -99,7 +103,7 @@ namespace Test1C.ViewModels
                 }
             }
 
-            MainWindowViewModel.Instance.PageContent = new ListTicket(_listTicket, _title, _description, _filePath);
+            MainWindowViewModel.Instance.PageContent = new ListTicket(_listTicket, _title, _description, _filePath, _pathView);
         }
 
         private async Task SaveErrorsToCsv(List<QuestionViewModel> errorQuestions)
@@ -228,6 +232,140 @@ namespace Test1C.ViewModels
             question.IsVisibleCorrectAnswer = !isCorrect;
             question.ColorBorder = isCorrect ? "#1CE942" : "#FF1E1E";
             TextResult = isCorrect ? "✓ Правильно" : "✗ Неправильно";
+        }
+
+        public async Task DelQuestions(QuestionViewModel question) {
+            if (question == null) return;
+
+            var result = await MessageBoxManager.GetMessageBoxStandard(
+                "Подтверждение",
+                "Хотите удалить этот вопрос из списка ошибок?",
+                ButtonEnum.YesNo
+            ).ShowAsync();
+
+            if (result == ButtonResult.Yes)
+            {
+                // Удаляем из обоих коллекций по QuestionNumber
+                NumberQuestion.Remove(question.QuestionNumber);
+                Questions.Remove(question);
+
+                // Сбрасываем выбор если нужно
+                if (SelectedQuestion == question)
+                {
+                    SelectedQuestion = null;
+                    SelectedNumber = 0;
+                    TextResult = string.Empty;
+                }
+
+                if (!Questions.Any())
+                {
+                    MainWindowViewModel.Instance.PageContent = new Menu();
+                }
+            }
+
+            // удаление из файла ошибок
+            try
+            {
+                string errorsDir = Path.Combine(AppContext.BaseDirectory, "File");
+                string filePath = Path.Combine(errorsDir, "errors.csv");
+
+                if (File.Exists(filePath))
+                {
+                    var lines = await File.ReadAllLinesAsync(filePath);
+                    var newLines = lines.Where(line =>
+                    {
+                        var parts = line.Split(';');
+                        if (parts.Length >= 2 &&
+                            int.TryParse(parts[0], out var ticket) &&
+                            int.TryParse(parts[1], out var qNumber))
+                        {
+                            return !(ticket == question.TicketNumber && qNumber == question.QuestionNumber);
+                        }
+                        return true;
+                    }).ToList();
+
+                    await File.WriteAllLinesAsync(filePath, newLines, Encoding.UTF8);
+                }
+            }
+            catch (Exception ex)
+            {
+                await MessageBoxManager.GetMessageBoxStandard(
+                    "Ошибка",
+                    $"Не удалось удалить вопрос из файла: {ex.Message}",
+                    ButtonEnum.Ok
+                ).ShowAsync();
+            }
+        }
+
+        public async Task DelAllQuestion()
+        {
+            if (!Questions.Any())
+            {
+                await MessageBoxManager.GetMessageBoxStandard(
+                    "Информация",
+                    "Нет вопросов для удаления",
+                    ButtonEnum.Ok
+                ).ShowAsync();
+                return;
+            }
+
+            var result = await MessageBoxManager.GetMessageBoxStandard(
+                "Подтверждение",
+                "Хотите удалить все ошибки этого билета и вернуться в меню?",
+                ButtonEnum.YesNo
+            ).ShowAsync();
+
+            if (result == ButtonResult.Yes)
+            {
+                try
+                {
+                    // Получаем номер текущего билета (берем из первого вопроса)
+                    int currentTicketNumber = Questions.First().TicketNumber;
+
+                    // Удаляем вопросы из файла errors.csv
+                    string errorsDir = Path.Combine(AppContext.BaseDirectory, "File");
+                    string filePath = Path.Combine(errorsDir, "errors.csv");
+
+                    if (File.Exists(filePath))
+                    {
+                        var lines = await File.ReadAllLinesAsync(filePath);
+                        var newLines = lines.Where(line =>
+                        {
+                            var parts = line.Split(';');
+                            if (parts.Length >= 2 &&
+                                int.TryParse(parts[0], out var ticket) &&
+                                int.TryParse(parts[1], out var qNumber))
+                            {
+                                return ticket != currentTicketNumber;
+                            }
+                            return true;
+                        }).ToList();
+
+                        await File.WriteAllLinesAsync(filePath, newLines, Encoding.UTF8);
+                    }
+
+                    // Очищаем текущие коллекции
+                    Questions.Clear();
+                    NumberQuestion.Clear();
+
+                    // Возвращаемся в меню
+                    MainWindowViewModel.Instance.PageContent = new Menu();
+
+                    await MessageBoxManager.GetMessageBoxStandard(
+                        "Успешно",
+                        $"Все вопросы билета {currentTicketNumber} удалены",
+                        ButtonEnum.Ok
+                    ).ShowAsync();
+                }
+                catch (Exception ex)
+                {
+                    await MessageBoxManager.GetMessageBoxStandard(
+                        "Ошибка",
+                        $"Не удалось удалить вопросы: {ex.Message}",
+                        ButtonEnum.Ok
+                    ).ShowAsync();
+                }
+            }
         }
     }
 }

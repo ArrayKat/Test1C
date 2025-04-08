@@ -1,52 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\user\\source\\repos\\Test1C\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\user\\source\\repos\\test1c\\test1c\\views\\listquestions.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
-      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\views\\listquestions.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\user\\source\\repos\\test1c\\test1c\\assets\\styles.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
-      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\assets\\styles.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 1,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Styles.axaml",
-              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\Assets\\Styles.axaml",
-              "RelativeDocumentMoniker": "Test1C\\Assets\\Styles.axaml",
-              "ToolTip": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\Assets\\Styles.axaml",
-              "RelativeToolTip": "Test1C\\Assets\\Styles.axaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-07T09:35:36.609Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ListQuestions.axaml",
-              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\Views\\ListQuestions.axaml",
-              "RelativeDocumentMoniker": "Test1C\\Views\\ListQuestions.axaml",
-              "ToolTip": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\Views\\ListQuestions.axaml",
-              "RelativeToolTip": "Test1C\\Views\\ListQuestions.axaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-07T09:30:28.417Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }

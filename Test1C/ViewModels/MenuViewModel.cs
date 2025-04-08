@@ -22,12 +22,12 @@ namespace Test1C.ViewModels
 
         public void GoMarathon() {
             _questions = ParseQuestions("File/read1.csv");
-            MainWindowViewModel.Instance.PageContent = new ListQuestions(null, null, null, _questions, "File/read1.csv");
+            MainWindowViewModel.Instance.PageContent = new ListQuestions(null, null, null, _questions, "File/read1.csv", null);
         }
         public void GoTems() {
             ParceFromTeme("File/Tems.txt");
             ListTickets.RemoveAt(0);
-            MainWindowViewModel.Instance.PageContent = new ListTicket(ListTickets, "Тренировка по темам", "Ваша цель - все темы должны стать пройденными на 100%", "File/read1.csv");
+            MainWindowViewModel.Instance.PageContent = new ListTicket(ListTickets, "Тренировка по темам", "Ваша цель - все темы должны стать пройденными на 100%", "File/read1.csv", null);
         }
         public void GoErrors()
         {
@@ -48,12 +48,12 @@ namespace Test1C.ViewModels
                 .Where(ticket => uniqueTicketNumbers.Contains(ticket.Id)) // предполагая, что ticket.Id соответствует TicketNumber
                 .ToList();
 
-            MainWindowViewModel.Instance.PageContent = new ListTicket(ListTickets, "Тренировка по темам", "Ваша цель - все темы должны стать пройденными на 100%", "File/errors.csv");
+            MainWindowViewModel.Instance.PageContent = new ListTicket(ListTickets, "Тренировка по темам", "Ваша цель - все темы должны стать пройденными на 100%", "File/errors.csv", "error");
         }
         public void GoExam()
         {
             ParceFromTeme("File/Tems.txt");
-            MainWindowViewModel.Instance.PageContent = new ListTicket(ListTickets, "Экзавмен", "Ваша цель - пройти тест из 14 вопросов", "File/read1.csv");
+            MainWindowViewModel.Instance.PageContent = new ListTicket(ListTickets, "Экзавмен", "Ваша цель - пройти тест из 14 вопросов", "File/read1.csv", null);
         }
 
 
