@@ -29,7 +29,7 @@ namespace Test1C.ViewModels
         string _pathView;
 
         public ObservableCollection<QuestionViewModel> Questions { get; }
-        public ObservableCollection<int> NumberQuestion { get; }
+        public ObservableCollection<string> NumberQuestion { get; }
 
         private int _selectedNumber;
         public int SelectedNumber
@@ -63,26 +63,77 @@ namespace Test1C.ViewModels
             _title = title;
             _filePath = filePath;
             _pathView = path;
-            Questions = new ObservableCollection<QuestionViewModel>(questions.Select(q => new QuestionViewModel(q)).OrderBy(x => x.QuestionNumber));
+
+            
             IsVisibleDel = path == "error" ? true : false;
 
-            NumberQuestion = new ObservableCollection<int>(Questions.Select(q => q.QuestionNumber));
+
+            if (_pathView == "marathon")
+            {
+                Questions = new ObservableCollection<QuestionViewModel>(
+                    questions.Select(q => new QuestionViewModel(q)));
+
+                NumberQuestion = new ObservableCollection<string>(
+                    Enumerable.Range(1, Questions.Count).Select(i => i.ToString()));
+
+                this.WhenAnyValue(x => x.SelectedNumber)
+                    .Where(number => number > 0 && number <= Questions.Count)
+                    .Subscribe(number =>
+                    {
+                        SelectedQuestion = Questions[number - 1];  // Индексация с 0
+                    });
+
+                this.WhenAnyValue(x => x.SelectedQuestion)
+                    .Where(question => question != null)
+                    .Subscribe(question =>
+                    {
+                        SelectedNumber = Questions.IndexOf(question) + 1;
+                    });
+            }
+            else if (_pathView == "exam")
+            {
+                Questions = new ObservableCollection<QuestionViewModel>(questions.Select(q => new QuestionViewModel(q)).OrderBy(x => x.TicketNumber));
+                NumberQuestion = new ObservableCollection<string>(Questions.Select(q => $"{q.TicketNumber}"));
+
+                // Синхронизация выбранного элемента
+                this.WhenAnyValue(x => x.SelectedNumber)
+                    .Where(number => number > 0)
+                    .Subscribe(number =>
+                    {
+                        SelectedQuestion = Questions.FirstOrDefault(q => q.TicketNumber == number);
+                    });
+
+                this.WhenAnyValue(x => x.SelectedQuestion)
+                    .Where(question => question != null)
+                    .Subscribe(question =>
+                    {
+                        SelectedNumber = question.TicketNumber;
+                    });
+
+            }
+            else {
+                Questions = new ObservableCollection<QuestionViewModel>(questions.Select(q => new QuestionViewModel(q)).OrderBy(x => x.QuestionNumber));
+                NumberQuestion = new ObservableCollection<string>(Questions.Select(q => $"{q.QuestionNumber}"));
+
+                // Синхронизация выбранного элемента
+                this.WhenAnyValue(x => x.SelectedNumber)
+                    .Where(number => number > 0)
+                    .Subscribe(number =>
+                    {
+                        SelectedQuestion = Questions.FirstOrDefault(q => q.QuestionNumber == number);
+                    });
+
+                this.WhenAnyValue(x => x.SelectedQuestion)
+                    .Where(question => question != null)
+                    .Subscribe(question =>
+                    {
+                        SelectedNumber = question.QuestionNumber;
+                    });
+            }
+
             CheckAnswersCommand = ReactiveCommand.Create<QuestionViewModel>(CheckAnswers);
 
-            // Синхронизация выбранного элемента
-            this.WhenAnyValue(x => x.SelectedNumber)
-                .Where(number => number > 0)
-                .Subscribe(number =>
-                {
-                    SelectedQuestion = Questions.FirstOrDefault(q => q.QuestionNumber == number);
-                });
-
-            this.WhenAnyValue(x => x.SelectedQuestion)
-                .Where(question => question != null)
-                .Subscribe(question =>
-                {
-                    SelectedNumber = question.QuestionNumber;
-                });
+            
         }
 
         public async Task GoBack()
@@ -102,8 +153,8 @@ namespace Test1C.ViewModels
                     await SaveErrorsToCsv(list);
                 }
             }
+            MainWindowViewModel.Instance.PageContent = _pathView == "marathon" ? new Menu() : new ListTicket(_listTicket, _title, _description, _filePath, _pathView);
 
-            MainWindowViewModel.Instance.PageContent = new ListTicket(_listTicket, _title, _description, _filePath, _pathView);
         }
 
         private async Task SaveErrorsToCsv(List<QuestionViewModel> errorQuestions)
@@ -187,6 +238,7 @@ namespace Test1C.ViewModels
                 {
                     foreach (var question in uniqueNewErrors)
                     {
+                        csv.WriteField(question.Id);
                         csv.WriteField(question.TicketNumber);
                         csv.WriteField(question.QuestionNumber);
                         csv.WriteField(question.CorrectAnswer);
@@ -234,7 +286,8 @@ namespace Test1C.ViewModels
             TextResult = isCorrect ? "✓ Правильно" : "✗ Неправильно";
         }
 
-        public async Task DelQuestions(QuestionViewModel question) {
+        public async Task DelQuestions(QuestionViewModel question)
+        {
             if (question == null) return;
 
             var result = await MessageBoxManager.GetMessageBoxStandard(
@@ -245,11 +298,16 @@ namespace Test1C.ViewModels
 
             if (result == ButtonResult.Yes)
             {
-                // Удаляем из обоих коллекций по QuestionNumber
-                NumberQuestion.Remove(question.QuestionNumber);
+                // Формируем строку для удаления из NumberQuestion
+                string numberToRemove = _pathView == "marathon"
+                    ? $"{question.TicketNumber}.{question.QuestionNumber}"
+                    : question.QuestionNumber.ToString();
+
+                // Удаляем из коллекций
+                NumberQuestion.Remove(numberToRemove);
                 Questions.Remove(question);
 
-                // Сбрасываем выбор если нужно
+                // Сбрасываем выбор, если нужно
                 if (SelectedQuestion == question)
                 {
                     SelectedQuestion = null;
@@ -257,13 +315,14 @@ namespace Test1C.ViewModels
                     TextResult = string.Empty;
                 }
 
+                // Если вопросы закончились, возвращаемся в меню
                 if (!Questions.Any())
                 {
                     MainWindowViewModel.Instance.PageContent = new Menu();
                 }
             }
 
-            // удаление из файла ошибок
+            // Удаление из файла ошибок
             try
             {
                 string errorsDir = Path.Combine(AppContext.BaseDirectory, "File");
@@ -333,8 +392,8 @@ namespace Test1C.ViewModels
                         {
                             var parts = line.Split(';');
                             if (parts.Length >= 2 &&
-                                int.TryParse(parts[0], out var ticket) &&
-                                int.TryParse(parts[1], out var qNumber))
+                                int.TryParse(parts[1], out var ticket) &&
+                                int.TryParse(parts[2], out var qNumber))
                             {
                                 return ticket != currentTicketNumber;
                             }

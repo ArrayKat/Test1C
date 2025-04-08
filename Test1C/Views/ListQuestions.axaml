@@ -12,8 +12,8 @@
 		<image:ImageConverter x:Key="ImageConv"></image:ImageConverter>
 	</UserControl.Resources>
 	
-	<Grid ColumnDefinitions="*, 10*">
-		<ListBox ItemsSource="{Binding NumberQuestion}" SelectedItem="{Binding SelectedNumber}" Grid.Column="0"/>
+	<Grid ColumnDefinitions="*, 10*" MaxWidth="1200">
+		<ListBox ItemsSource="{Binding NumberQuestion}" SelectedItem="{Binding SelectedNumber}" Grid.Column="0" HorizontalAlignment="Stretch"/>
 		
 		<Grid RowDefinitions="*, 7*" Margin="20" HorizontalAlignment="Center" Grid.Column="1">
 			<StackPanel Grid.Row="0" Orientation="Horizontal">

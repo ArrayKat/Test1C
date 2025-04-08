@@ -20,6 +20,7 @@ namespace Test1C.ViewModels
         }
 
         // Прокси-свойства для данных
+        public int Id => _model.Id; 
         public int TicketNumber => _model.TicketNumber;
         public int QuestionNumber => _model.QuestionNumber;
         public string QuestionText => _model.QuestionText;

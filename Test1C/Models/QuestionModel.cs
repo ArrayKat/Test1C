@@ -10,6 +10,7 @@ namespace Test1C.Models
 {
     public partial class QuestionModel
     {
+        public int Id { get; set; }
         public int TicketNumber { get; set; }       // Номер билета (1)
         public int QuestionNumber { get; set; }    // Номер вопроса в билете (1)
         public int CorrectAnswer { get; set; }      // Номер правильного ответа (5)

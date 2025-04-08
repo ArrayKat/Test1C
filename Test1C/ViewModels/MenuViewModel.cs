@@ -22,7 +22,7 @@ namespace Test1C.ViewModels
 
         public void GoMarathon() {
             _questions = ParseQuestions("File/read1.csv");
-            MainWindowViewModel.Instance.PageContent = new ListQuestions(null, null, null, _questions, "File/read1.csv", null);
+            MainWindowViewModel.Instance.PageContent = new ListQuestions(null, null, null, _questions, "File/read1.csv", "marathon");
         }
         public void GoTems() {
             ParceFromTeme("File/Tems.txt");
@@ -53,7 +53,7 @@ namespace Test1C.ViewModels
         public void GoExam()
         {
             ParceFromTeme("File/Tems.txt");
-            MainWindowViewModel.Instance.PageContent = new ListTicket(ListTickets, "Экзавмен", "Ваша цель - пройти тест из 14 вопросов", "File/read1.csv", null);
+            MainWindowViewModel.Instance.PageContent = new ListTicket(ListTickets, "Экзавмен", "Ваша цель - пройти тест из 14 вопросов", "File/read1.csv", "exam");
         }
 
 
@@ -113,22 +113,23 @@ namespace Test1C.ViewModels
 
                         var question = new QuestionModel
                         {
-                            TicketNumber = int.Parse(record[0]),
-                            QuestionNumber = int.Parse(record[1]),
-                            CorrectAnswer = int.Parse(record[2]),
-                            ImagePath = record[3] == "null" ? null : record[3],
-                            QuestionText = record[4].Replace("«", "<").Replace("»", ">"),
+                            Id = int.Parse(record[0]),
+                            TicketNumber = int.Parse(record[1]),
+                            QuestionNumber = int.Parse(record[2]),
+                            CorrectAnswer = int.Parse(record[3]),
+                            ImagePath = record[4] == "null" ? null : record[4],
+                            QuestionText = record[5].Replace("«", "<").Replace("»", ">"),
                             Answers = new List<Answer>()
                         };
 
                         // Добавляем ответы (начиная с 5 поля)
-                        for (int i = 5; i < record.Length; i++)
+                        for (int i = 6; i < record.Length; i++)
                         {
                             if (!string.IsNullOrWhiteSpace(record[i]))
                             {
                                 Answer tmp = new Answer()
                                 {
-                                    Number = i - 4,
+                                    Number = i - 5,
                                     TextAns = record[i].Trim()
                                 };
                                 question.Answers.Add(tmp);
