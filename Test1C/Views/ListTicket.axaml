@@ -59,13 +59,13 @@
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<Border Name="MyItemBorder" CornerRadius="5" Background="#F99D20" Margin="7">
-						<StackPanel Orientation="Horizontal">
-							<StackPanel Orientation="Vertical">
+						<Grid ColumnDefinitions="9*, *">
+							<StackPanel Orientation="Vertical" Grid.Column="0">
 								<TextBlock Text="{Binding Title}" Margin="7"/>
 								<TextBlock Text="{Binding QuestionCount}" Margin="7 2 0 7"/>
 							</StackPanel>
-							<TextBlock Text="{Binding Percent }" Margin="7 2 0 7"/>
-						</StackPanel>
+							<TextBlock Text="{Binding Percent, StringFormat=' {0}%'}" Margin="7 2 0 7" Grid.Column="1" VerticalAlignment="Center" FontSize="24" IsVisible="{Binding $parent[UserControl].((vm:ListTicketViewModel)DataContext).IsVisiblePercent}"/>
+						</Grid>
 					</Border>
 				</DataTemplate>
 			</ListBox.ItemTemplate>

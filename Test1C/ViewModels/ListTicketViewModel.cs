@@ -42,6 +42,8 @@ namespace Test1C.ViewModels
             Description = desc;
             _filePath = filePath;
             _pathView = pathView;
+
+            IsVisiblePercent = (_pathView != null && _pathView.Contains("exam")) ? true : false;
         }
 
         public void GoBack() {
@@ -50,13 +52,13 @@ namespace Test1C.ViewModels
 
         public void GoQuestion() {
             if (_pathView == null) {
-                IsVisiblePercent = false;
+               
                 Questions = ParseQuestionsTicket(_filePath, SelectedItem.Id);
                 MainWindowViewModel.Instance.PageContent = new ListQuestions(ListTicket, Title, Description, Questions, _filePath, _pathView);
             }
             else if (_pathView.Contains("exam"))
             {
-                IsVisiblePercent = true;
+               
                 var random = new Random();
 
                 // Получаем все вопросы
@@ -94,7 +96,6 @@ namespace Test1C.ViewModels
                 MainWindowViewModel.Instance.PageContent = new ListQuestions(ListTicket, Title, Description, Questions, _filePath, _pathView);
             }
         }
-
 
 
         static List<QuestionModel> ParseQuestionsTicket(string filePath, int idTicket)

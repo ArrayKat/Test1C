@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using CsvHelper;
 using CsvHelper.Configuration;
+using DynamicData.Kernel;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
 using ReactiveUI;
@@ -135,17 +136,8 @@ namespace Test1C.ViewModels
 
         public async Task GoBack()
         {
-            if (_pathView.Contains("exam"))
-            {
-                int countError = Questions.Where(x=>x.ColorBorder == "#FF1E1E").Count();
-                int countSuccess = Questions.Where(x => x.ColorBorder == "#1CE942").Count();
-                if (countError + countSuccess != 14)
-                    MessageBoxManager.GetMessageBoxStandard("Уведомление", "Вы прошли не все вопросы, пройдите все вопросы в режиме экзамена", ButtonEnum.Ok, Icon.Warning).ShowAsync();
-                else { 
-
-                }
-            }
-            else
+            
+            if(_pathView == null || !_pathView.Contains("exam"))
             {
                 List<QuestionViewModel> list = Questions.Where(x => x.ColorBorder == "#FF1E1E").ToList();
 
@@ -163,6 +155,65 @@ namespace Test1C.ViewModels
                     }
                 }
                 MainWindowViewModel.Instance.PageContent = _pathView == "marathon" ? new Menu() : new ListTicket(_listTicket, _title, _description, _filePath, _pathView);
+            }
+            else
+            {
+                int countError = Questions.Where(x => x.ColorBorder == "#FF1E1E").Count();
+                int countSuccess = Questions.Where(x => x.ColorBorder == "#1CE942").Count();
+                if (countError + countSuccess != 14)
+                    MessageBoxManager.GetMessageBoxStandard("Уведомление", "Вы прошли не все вопросы, пройдите все вопросы в режиме экзамена", ButtonEnum.Ok, Icon.Warning).ShowAsync();
+                else
+                {
+                    int total = Questions.Count;
+                    int percentage = Convert.ToInt32(countSuccess * 100.0 / total);
+                    MessageBoxManager.GetMessageBoxStandard("Уведомление", $"Вы прошли тест на {percentage}% из 100%", ButtonEnum.Ok, Icon.Info).ShowAsync();
+                    var ticket = _listTicket.FirstOrDefault(x => x.Id == Questions.First().TicketNumber);
+
+                    if (_pathView == "exam/all") ticket = _listTicket.First();
+                    if (ticket != null && ticket.Percent < percentage) {
+                        ticket.Percent = percentage;
+                        await UpdateTicketsFile(ticket);
+                    }
+
+                    MainWindowViewModel.Instance.PageContent = new Menu();
+
+                }
+            }
+        }
+
+
+        private async Task UpdateTicketsFile(Ticket updatedTicket)
+        {
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "File", "Tems.txt");
+
+            try
+            {
+                // Читаем все строки файла
+                var lines = await File.ReadAllLinesAsync(filePath);
+
+                // Находим строку для обновления
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    if (lines[i].StartsWith(updatedTicket.Title))
+                    {
+                        // Разбиваем строку на части
+                        var parts = lines[i].Split(';');
+
+                        // Формируем обновленную строку
+                        lines[i] = $"{parts[0]};{parts[1]};{updatedTicket.Percent};";
+                        break;
+                    }
+                }
+
+                // Записываем обновленные данные обратно в файл
+                await File.WriteAllLinesAsync(filePath, lines);
+            }
+            catch (Exception ex)
+            {
+                await MessageBoxManager.GetMessageBoxStandard("Ошибка",
+                    $"Не удалось сохранить результаты: {ex.Message}",
+                    ButtonEnum.Ok,
+                    Icon.Error).ShowAsync();
             }
         }
 

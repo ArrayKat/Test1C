@@ -11,6 +11,6 @@ namespace Test1C.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string QuestionCount { get; set; }
-        public string Percent { get; set; }
+        public int Percent { get; set; }
     }
 }

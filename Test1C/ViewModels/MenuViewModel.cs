@@ -71,13 +71,14 @@ namespace Test1C.ViewModels
                 if (string.IsNullOrWhiteSpace(line)) continue;
 
                 var parts = line.Split(';');
-                if (parts.Length >= 2)
+                if (parts.Length >= 3)
                 {
                     newList.Add(new Ticket
                     {
                         Id = localId,
                         Title = parts[0].Trim(),
-                        QuestionCount = parts[1].Trim()
+                        QuestionCount = parts[1].Trim(),
+                        Percent = int.Parse(parts[2].Trim())
                     });
                     localId++;
                 }
