@@ -90,7 +90,7 @@ namespace Test1C.ViewModels
                         SelectedNumber = Questions.IndexOf(question) + 1;
                     });
             }
-            else if (_pathView == "exam")
+            else if (_pathView == "exam/all")
             {
                 Questions = new ObservableCollection<QuestionViewModel>(questions.Select(q => new QuestionViewModel(q)).OrderBy(x => x.TicketNumber));
                 NumberQuestion = new ObservableCollection<string>(Questions.Select(q => $"{q.TicketNumber}"));
@@ -130,31 +130,40 @@ namespace Test1C.ViewModels
                         SelectedNumber = question.QuestionNumber;
                     });
             }
-
             CheckAnswersCommand = ReactiveCommand.Create<QuestionViewModel>(CheckAnswers);
-
-            
         }
 
         public async Task GoBack()
         {
-            List<QuestionViewModel> list = Questions.Where(x => x.ColorBorder == "#FF1E1E").ToList();
-
-            if (list.Any())
+            if (_pathView.Contains("exam"))
             {
-                var result = await MessageBoxManager.GetMessageBoxStandard(
-                    "Уведомление",
-                    "Хотите сохранить вопросы с ошибками?",
-                    ButtonEnum.YesNo
-                ).ShowAsync();
+                int countError = Questions.Where(x=>x.ColorBorder == "#FF1E1E").Count();
+                int countSuccess = Questions.Where(x => x.ColorBorder == "#1CE942").Count();
+                if (countError + countSuccess != 14)
+                    MessageBoxManager.GetMessageBoxStandard("Уведомление", "Вы прошли не все вопросы, пройдите все вопросы в режиме экзамена", ButtonEnum.Ok, Icon.Warning).ShowAsync();
+                else { 
 
-                if (result == ButtonResult.Yes)
-                {
-                    await SaveErrorsToCsv(list);
                 }
             }
-            MainWindowViewModel.Instance.PageContent = _pathView == "marathon" ? new Menu() : new ListTicket(_listTicket, _title, _description, _filePath, _pathView);
+            else
+            {
+                List<QuestionViewModel> list = Questions.Where(x => x.ColorBorder == "#FF1E1E").ToList();
 
+                if (list.Any())
+                {
+                    var result = await MessageBoxManager.GetMessageBoxStandard(
+                        "Уведомление",
+                        "Хотите сохранить вопросы с ошибками?",
+                        ButtonEnum.YesNo
+                    ).ShowAsync();
+
+                    if (result == ButtonResult.Yes)
+                    {
+                        await SaveErrorsToCsv(list);
+                    }
+                }
+                MainWindowViewModel.Instance.PageContent = _pathView == "marathon" ? new Menu() : new ListTicket(_listTicket, _title, _description, _filePath, _pathView);
+            }
         }
 
         private async Task SaveErrorsToCsv(List<QuestionViewModel> errorQuestions)

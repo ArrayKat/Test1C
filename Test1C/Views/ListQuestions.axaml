@@ -63,7 +63,13 @@
 								<ItemsControl  ItemsSource="{Binding Answers}">
 									<ItemsControl.ItemTemplate>
 										<DataTemplate>
-											<RadioButton Foreground="Black" GroupName="{Binding QuestionGroupe}" Content="{Binding TextAns}" IsChecked="{Binding IsChecked}"/>
+											<RadioButton Foreground="Black" GroupName="{Binding QuestionGroupe}"  Content="{Binding TextAns}" IsChecked="{Binding IsChecked}">
+												<RadioButton.ContentTemplate>
+													<DataTemplate>
+														<TextBlock Text="{Binding }" TextWrapping="Wrap"/>
+													</DataTemplate>
+												</RadioButton.ContentTemplate>
+											</RadioButton>
 										</DataTemplate>
 									</ItemsControl.ItemTemplate>
 								</ItemsControl >

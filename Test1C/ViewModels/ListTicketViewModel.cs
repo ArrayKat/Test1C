@@ -23,14 +23,18 @@ namespace Test1C.ViewModels
         Ticket _selectedItem;
         public Ticket SelectedItem { get => _selectedItem; set { this.RaiseAndSetIfChanged(ref _selectedItem, value); GoQuestion(); } }
 
-        List<QuestionModel> _questions;
-        public List<QuestionModel> Questions { get => _questions; set => this.RaiseAndSetIfChanged(ref _questions, value); }
+        List<QuestionModel> questions;
+        public List<QuestionModel> Questions { get => questions; set => this.RaiseAndSetIfChanged(ref questions, value); }
 
-        string _title;
-        public string Title { get => _title; set => this.RaiseAndSetIfChanged(ref _title , value); }
+        string title;
+        public string Title { get => title; set => this.RaiseAndSetIfChanged(ref title , value); }
 
-        string _description;
-        public string Description { get => _description; set => this.RaiseAndSetIfChanged(ref _description, value); }
+        string description;
+        public string Description { get => description; set => this.RaiseAndSetIfChanged(ref description, value); }
+        
+
+        bool isVisiblePercent;
+        public bool IsVisiblePercent { get => isVisiblePercent; set => this.RaiseAndSetIfChanged(ref isVisiblePercent, value); }
 
         public ListTicketViewModel(List<Ticket> list,string title, string desc, string filePath, string pathView) {
             ListTicket = list;
@@ -45,8 +49,14 @@ namespace Test1C.ViewModels
         }
 
         public void GoQuestion() {
-            if (_pathView == "exam")
+            if (_pathView == null) {
+                IsVisiblePercent = false;
+                Questions = ParseQuestionsTicket(_filePath, SelectedItem.Id);
+                MainWindowViewModel.Instance.PageContent = new ListQuestions(ListTicket, Title, Description, Questions, _filePath, _pathView);
+            }
+            else if (_pathView.Contains("exam"))
             {
+                IsVisiblePercent = true;
                 var random = new Random();
 
                 // Получаем все вопросы
@@ -67,9 +77,11 @@ namespace Test1C.ViewModels
                         var questionFromGroup = group.OrderBy(_ => random.Next()).First();
                         selectedQuestions.Add(questionFromGroup);
                     }
+                    _pathView = "exam/all";
                 }
                 else
                 {
+                    _pathView = "exam/teme";
                     selectedQuestions = allQuestions;
                 }
                 Questions = selectedQuestions.OrderBy(x => random.Next()).Take(14).ToList();
@@ -77,10 +89,13 @@ namespace Test1C.ViewModels
             }
             else
             {
+                IsVisiblePercent = false;
                 Questions = ParseQuestionsTicket(_filePath, SelectedItem.Id);
                 MainWindowViewModel.Instance.PageContent = new ListQuestions(ListTicket, Title, Description, Questions, _filePath, _pathView);
             }
         }
+
+
 
         static List<QuestionModel> ParseQuestionsTicket(string filePath, int idTicket)
         {
@@ -144,5 +159,7 @@ namespace Test1C.ViewModels
             questions = idTicket!=0 ? questions.Where(x => x.TicketNumber == idTicket).ToList() : questions;
             return questions;
         }
+
+       
     }
 }

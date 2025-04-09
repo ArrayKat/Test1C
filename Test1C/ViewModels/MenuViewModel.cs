@@ -41,8 +41,6 @@ namespace Test1C.ViewModels
                 .Select(g => g.Key)
                 .ToList();
 
-          
-
             // 4. Оставляем только билеты с уникальными номерами
             ListTickets = ListTickets
                 .Where(ticket => uniqueTicketNumbers.Contains(ticket.Id)) // предполагая, что ticket.Id соответствует TicketNumber
@@ -53,7 +51,7 @@ namespace Test1C.ViewModels
         public void GoExam()
         {
             ParceFromTeme("File/Tems.txt");
-            MainWindowViewModel.Instance.PageContent = new ListTicket(ListTickets, "Экзавмен", "Ваша цель - пройти тест из 14 вопросов", "File/read1.csv", "exam");
+            MainWindowViewModel.Instance.PageContent = new ListTicket(ListTickets, "Экзамен", "Ваша цель - пройти тест из 14 вопросов", "File/read1.csv", "exam");
         }
 
 

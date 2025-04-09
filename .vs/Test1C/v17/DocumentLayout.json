@@ -3,16 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\user\\source\\repos\\Test1C\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\user\\source\\repos\\test1c\\test1c\\viewmodels\\listquestionsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\viewmodels\\listquestionsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\user\\source\\repos\\test1c\\test1c\\views\\listquestions.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
+      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\views\\listquestions.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\user\\source\\repos\\test1c\\test1c\\models\\questionmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\models\\questionmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\user\\source\\repos\\test1c\\test1c\\models\\ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\models\\ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\user\\source\\repos\\test1c\\test1c\\views\\listticket.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
+      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\views\\listticket.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\user\\source\\repos\\test1c\\test1c\\viewmodels\\listticketviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\viewmodels\\listticketviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\user\\source\\repos\\test1c\\test1c\\viewmodels\\listquestionsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\viewmodels\\listquestionsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\user\\source\\repos\\test1c\\test1c\\viewmodels\\menuviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -21,10 +33,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\user\\source\\repos\\test1c\\test1c\\viewmodels\\questionviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\viewmodels\\questionviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\user\\source\\repos\\test1c\\test1c\\views\\listquestions.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
-      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\views\\listquestions.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,20 +46,45 @@
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ListTicket.axaml",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\Views\\ListTicket.axaml",
+              "RelativeDocumentMoniker": "Test1C\\Views\\ListTicket.axaml",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\Views\\ListTicket.axaml",
+              "RelativeToolTip": "Test1C\\Views\\ListTicket.axaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-09T09:55:51.437Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Ticket.cs",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\Models\\Ticket.cs",
+              "RelativeDocumentMoniker": "Test1C\\Models\\Ticket.cs",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\Models\\Ticket.cs",
+              "RelativeToolTip": "Test1C\\Models\\Ticket.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T09:54:45.514Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
               "Title": "QuestionModel.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\Models\\QuestionModel.cs",
               "RelativeDocumentMoniker": "Test1C\\Models\\QuestionModel.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\Models\\QuestionModel.cs",
               "RelativeToolTip": "Test1C\\Models\\QuestionModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-08T10:48:49.682Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "ListQuestions.axaml",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\Views\\ListQuestions.axaml",
               "RelativeDocumentMoniker": "Test1C\\Views\\ListQuestions.axaml",
@@ -63,52 +96,52 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "QuestionViewModel.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\ViewModels\\QuestionViewModel.cs",
               "RelativeDocumentMoniker": "Test1C\\ViewModels\\QuestionViewModel.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\ViewModels\\QuestionViewModel.cs",
               "RelativeToolTip": "Test1C\\ViewModels\\QuestionViewModel.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAQwBYAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAcwBMAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-08T09:01:46.525Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "ListQuestionsViewModel.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\ViewModels\\ListQuestionsViewModel.cs",
               "RelativeDocumentMoniker": "Test1C\\ViewModels\\ListQuestionsViewModel.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\ViewModels\\ListQuestionsViewModel.cs",
               "RelativeToolTip": "Test1C\\ViewModels\\ListQuestionsViewModel.cs",
-              "ViewState": "AgIAAIEBAAAAAAAAAAAhwJcBAAArAAAAAAAAAA==",
+              "ViewState": "AgIAADoAAAAAAAAAAAA6wJIAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-08T08:49:07.078Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "ListTicketViewModel.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\ViewModels\\ListTicketViewModel.cs",
               "RelativeDocumentMoniker": "Test1C\\ViewModels\\ListTicketViewModel.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\ViewModels\\ListTicketViewModel.cs",
               "RelativeToolTip": "Test1C\\ViewModels\\ListTicketViewModel.cs",
-              "ViewState": "AgIAAF0AAAAAAAAAAAAAwFYAAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAB0AAAAAAAAAAAA5wGEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-08T08:32:15.694Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "MenuViewModel.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\ViewModels\\MenuViewModel.cs",
               "RelativeDocumentMoniker": "Test1C\\ViewModels\\MenuViewModel.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\ViewModels\\MenuViewModel.cs",
               "RelativeToolTip": "Test1C\\ViewModels\\MenuViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAA4AAAAAAAAAA==",
+              "ViewState": "AgIAAHwAAAAAAAAAAAAwwJAAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-08T08:29:28.754Z",
               "EditorCaption": ""

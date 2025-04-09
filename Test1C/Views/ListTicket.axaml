@@ -59,9 +59,12 @@
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<Border Name="MyItemBorder" CornerRadius="5" Background="#F99D20" Margin="7">
-						<StackPanel>
-							<TextBlock Text="{Binding Title}" Margin="7"/>
-							<TextBlock Text="{Binding QuestionCount}" Margin="7 2 0 7"/>
+						<StackPanel Orientation="Horizontal">
+							<StackPanel Orientation="Vertical">
+								<TextBlock Text="{Binding Title}" Margin="7"/>
+								<TextBlock Text="{Binding QuestionCount}" Margin="7 2 0 7"/>
+							</StackPanel>
+							<TextBlock Text="{Binding Percent }" Margin="7 2 0 7"/>
 						</StackPanel>
 					</Border>
 				</DataTemplate>
