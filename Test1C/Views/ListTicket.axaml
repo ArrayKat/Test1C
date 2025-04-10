@@ -18,8 +18,8 @@
 				<StackPanel Orientation="Horizontal" Height="60">
 					<Image Source="avares://Test1C/Assets/icon.png" Width="120" Height="50" Margin="5"/>
 					<StackPanel Orientation="Vertical" >
-						<TextBlock  Text="Title" FontWeight="Bold" Foreground="#30267D" Margin="0 10 0 0"/>
-						<TextBlock Text="Description" Foreground="#30267D"/>
+						<TextBlock  Text="{Binding Title}" FontWeight="Bold" Foreground="#30267D" Margin="0 10 0 0"/>
+						<TextBlock Text="{Binding Description}" Foreground="#30267D"/>
 					</StackPanel>
 				</StackPanel>
 			</Border>

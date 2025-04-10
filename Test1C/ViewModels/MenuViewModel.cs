@@ -27,7 +27,7 @@ namespace Test1C.ViewModels
         public void GoTems() {
             ParceFromTeme("File/Tems.txt");
             ListTickets.RemoveAt(0);
-            MainWindowViewModel.Instance.PageContent = new ListTicket(ListTickets, "Тренировка по темам", "Ваша цель - все темы должны стать пройденными на 100%", "File/read1.csv", null);
+            MainWindowViewModel.Instance.PageContent = new ListTicket(ListTickets, "Тренировка по темам", "Ваша цель - все темы должны стать пройденными на 100%", "File/read1.csv", "teme");
         }
         public void GoErrors()
         {
@@ -46,7 +46,7 @@ namespace Test1C.ViewModels
                 .Where(ticket => uniqueTicketNumbers.Contains(ticket.Id)) // предполагая, что ticket.Id соответствует TicketNumber
                 .ToList();
 
-            MainWindowViewModel.Instance.PageContent = new ListTicket(ListTickets, "Тренировка по темам", "Ваша цель - все темы должны стать пройденными на 100%", "File/errors.csv", "error");
+            MainWindowViewModel.Instance.PageContent = new ListTicket(ListTickets, "Тренировка по ошибкам", "Ваша цель - повторить свои ошибки", "File/errors.csv", "error");
         }
         public void GoExam()
         {

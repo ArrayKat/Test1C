@@ -57,6 +57,12 @@ namespace Test1C.ViewModels
         public bool IsVisibleDel { get => _isVisibleDel; set => this.RaiseAndSetIfChanged(ref _isVisibleDel, value); }
         public ReactiveCommand<QuestionViewModel, Unit> CheckAnswersCommand { get; }
 
+        string title;
+        public string Title { get => title; set => this.RaiseAndSetIfChanged( ref title, value); }
+
+        string description;
+        public string Description { get => description; set => this.RaiseAndSetIfChanged(ref description, value); }
+
         public ListQuestionsViewModel(List<Ticket> list, string title, string desc, List<QuestionModel> questions, string filePath, string path)
         {
             _listTicket = list;
@@ -65,6 +71,28 @@ namespace Test1C.ViewModels
             _filePath = filePath;
             _pathView = path;
 
+
+            string teme = "По всем темам";
+            string countTeme = "961 вопрос";
+            int countQ = 0;
+
+            if (list != null && questions != null && questions.Any())
+            {
+                var numTeme = questions.First().TicketNumber;
+                var ticket = list.FirstOrDefault(x => x.Id == numTeme);
+
+                teme = ticket?.Title ?? "По всем темам";
+                countQ = questions.Count;
+                countTeme = ticket?.QuestionCount ?? "961 вопрос";
+            }
+
+            switch (_pathView) {
+                case "marathon": Title = "Марафон по всем билетам"; Description = "961 вопрос"; break;
+                case "exam/teme": Title = teme; Description = "14 вопросов"; break;
+                case "exam/all": Title = "Экзамен по всем билетам"; Description = "14 вопросов"; break;
+                case "error": Title = teme; Description = $"{countQ} вопросов"; break;
+                case "teme": Title = teme;  Description = countTeme;  break;
+            }
             
             IsVisibleDel = path == "error" ? true : false;
 
@@ -231,6 +259,8 @@ namespace Test1C.ViewModels
                 // 2. Получаем новые ошибки (с неправильными ответами)
                 var newErrors = errorQuestions
                     .Where(q => q.ColorBorder == "#FF1E1E")
+                    .GroupBy(q => new { q.TicketNumber, q.QuestionNumber, q.QuestionText })
+                    .Select(g => g.First())
                     .ToList();
 
                 if (!newErrors.Any())
@@ -244,7 +274,7 @@ namespace Test1C.ViewModels
                 }
 
                 // 3. Читаем существующие ошибки из файла
-                var existingErrors = new HashSet<(int Ticket, int Question)>();
+                var existingErrorIds = new HashSet<(int Ticket, int Question)>();
 
                 if (File.Exists(filePath))
                 {
@@ -259,11 +289,11 @@ namespace Test1C.ViewModels
                             var line = await reader.ReadLineAsync();
                             var parts = line?.Split(';');
 
-                            if (parts?.Length >= 2 &&
-                                int.TryParse(parts[0], out var ticket) &&
-                                int.TryParse(parts[1], out var question))
+                            if (parts?.Length >= 3 &&
+                                int.TryParse(parts[1], out var ticket) &&
+                                int.TryParse(parts[2], out var question))
                             {
-                                existingErrors.Add((ticket, question));
+                                existingErrorIds.Add((ticket, question));
                             }
                         }
                     }
@@ -271,7 +301,7 @@ namespace Test1C.ViewModels
 
                 // 4. Фильтруем только действительно новые ошибки
                 var uniqueNewErrors = newErrors
-                    .Where(q => !existingErrors.Contains((q.TicketNumber, q.QuestionNumber)))
+                    .Where(q => !existingErrorIds.Contains((q.TicketNumber, q.QuestionNumber)))
                     .ToList();
 
                 if (!uniqueNewErrors.Any())
@@ -289,14 +319,14 @@ namespace Test1C.ViewModels
                 {
                     Delimiter = ";",
                     Encoding = Encoding.UTF8,
-                    HasHeaderRecord = !File.Exists(filePath)
+                    HasHeaderRecord = !File.Exists(filePath) || new FileInfo(filePath).Length == 0
                 };
 
                 // 6. Записываем новые ошибки в файл
                 using (var writer = new StreamWriter(filePath, true, Encoding.UTF8))
                 using (var csv = new CsvWriter(writer, config))
                 {
-                    foreach (var question in uniqueNewErrors)
+                    foreach (var question in uniqueNewErrors.OrderBy(q => q.TicketNumber).ThenBy(q => q.QuestionNumber))
                     {
                         csv.WriteField(question.Id);
                         csv.WriteField(question.TicketNumber);
@@ -312,7 +342,11 @@ namespace Test1C.ViewModels
 
                         foreach (var answer in question.Answers.OrderBy(a => a.Number))
                         {
-                            csv.WriteField(answer.TextAns);
+                            string answerText = answer.TextAns
+                                .Replace("\"", "\"\"")
+                                .Replace("<", "«")
+                                .Replace(">", "»");
+                            csv.WriteField(answerText);
                         }
 
                         await csv.NextRecordAsync();
@@ -321,7 +355,7 @@ namespace Test1C.ViewModels
 
                 await MessageBoxManager.GetMessageBoxStandard(
                     "Сохранено",
-                    $"Добавлено {uniqueNewErrors.Count} новых ошибок",
+                    $"Добавлено {uniqueNewErrors.Count} новых ошибок. Всего ошибок: {existingErrorIds.Count + uniqueNewErrors.Count}",
                     ButtonEnum.Ok
                 ).ShowAsync();
             }
@@ -356,18 +390,65 @@ namespace Test1C.ViewModels
                 ButtonEnum.YesNo
             ).ShowAsync();
 
-            if (result == ButtonResult.Yes)
+            if (result != ButtonResult.Yes) return;
+
+            try
             {
-                // Формируем строку для удаления из NumberQuestion
+                // 1. Удаление из файла ошибок
+                string errorsDir = Path.Combine(AppContext.BaseDirectory, "File");
+                string filePath = Path.Combine(errorsDir, "errors.csv");
+
+                if (File.Exists(filePath))
+                {
+                    // Читаем все строки файла
+                    var lines = await File.ReadAllLinesAsync(filePath);
+
+                    // Фильтруем строки, оставляя только те, которые не соответствуют удаляемому вопросу
+                    var newLines = new List<string>();
+                    bool headerExists = lines.Length > 0 && lines[0].StartsWith("Id;");
+
+                    foreach (var line in lines)
+                    {
+                        // Пропускаем заголовок
+                        if (headerExists && line == lines[0])
+                        {
+                            newLines.Add(line);
+                            continue;
+                        }
+
+                        var parts = line.Split(';');
+                        if (parts.Length >= 3 &&
+                            int.TryParse(parts[1], out var ticket) &&
+                            int.TryParse(parts[2], out var qNumber))
+                        {
+                            if (!(ticket == question.TicketNumber && qNumber == question.QuestionNumber))
+                            {
+                                newLines.Add(line);
+                            }
+                        }
+                        else
+                        {
+                            // Сохраняем строки, которые не удалось распарсить
+                            newLines.Add(line);
+                        }
+                    }
+
+                    // Перезаписываем файл только если количество строк изменилось
+                    if (newLines.Count != lines.Length)
+                    {
+                        await File.WriteAllLinesAsync(filePath, newLines, Encoding.UTF8);
+                    }
+                }
+
+                // 2. Удаление из UI-коллекций
                 string numberToRemove = _pathView == "marathon"
                     ? $"{question.TicketNumber}.{question.QuestionNumber}"
                     : question.QuestionNumber.ToString();
 
-                // Удаляем из коллекций
                 NumberQuestion.Remove(numberToRemove);
                 Questions.Remove(question);
 
-                // Сбрасываем выбор, если нужно
+                // 3. Сброс выбора
                 if (SelectedQuestion == question)
                 {
                     SelectedQuestion = null;
@@ -375,42 +456,23 @@ namespace Test1C.ViewModels
                     TextResult = string.Empty;
                 }
 
-                // Если вопросы закончились, возвращаемся в меню
+                // 4. Возврат в меню, если вопросов не осталось
                 if (!Questions.Any())
                 {
                     MainWindowViewModel.Instance.PageContent = new Menu();
                 }
-            }
 
-            // Удаление из файла ошибок
-            try
-            {
-                string errorsDir = Path.Combine(AppContext.BaseDirectory, "File");
-                string filePath = Path.Combine(errorsDir, "errors.csv");
-
-                if (File.Exists(filePath))
-                {
-                    var lines = await File.ReadAllLinesAsync(filePath);
-                    var newLines = lines.Where(line =>
-                    {
-                        var parts = line.Split(';');
-                        if (parts.Length >= 2 &&
-                            int.TryParse(parts[0], out var ticket) &&
-                            int.TryParse(parts[1], out var qNumber))
-                        {
-                            return !(ticket == question.TicketNumber && qNumber == question.QuestionNumber);
-                        }
-                        return true;
-                    }).ToList();
-
-                    await File.WriteAllLinesAsync(filePath, newLines, Encoding.UTF8);
-                }
+                await MessageBoxManager.GetMessageBoxStandard(
+                    "Успешно",
+                    "Вопрос удален из списка ошибок",
+                    ButtonEnum.Ok
+                ).ShowAsync();
             }
             catch (Exception ex)
             {
                 await MessageBoxManager.GetMessageBoxStandard(
                     "Ошибка",
-                    $"Не удалось удалить вопрос из файла: {ex.Message}",
+                    $"Не удалось удалить вопрос: {ex.Message}",
                     ButtonEnum.Ok
                 ).ShowAsync();
             }
