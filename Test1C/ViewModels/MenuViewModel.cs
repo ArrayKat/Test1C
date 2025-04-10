@@ -54,7 +54,6 @@ namespace Test1C.ViewModels
             MainWindowViewModel.Instance.PageContent = new ListTicket(ListTickets, "Экзамен", "Ваша цель - пройти тест из 14 вопросов", "File/read1.csv", "exam");
         }
 
-
         void ParceFromTeme(string filePath)
         {
             int localId = 0;

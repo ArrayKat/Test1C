@@ -9,6 +9,8 @@ using CsvHelper.Configuration;
 using CsvHelper;
 using ReactiveUI;
 using Test1C.Models;
+using MsBox.Avalonia.Enums;
+using MsBox.Avalonia;
 
 namespace Test1C.ViewModels
 {
@@ -44,6 +46,11 @@ namespace Test1C.ViewModels
             _pathView = pathView;
 
             IsVisiblePercent = (_pathView != null && _pathView.Contains("exam")) ? true : false;
+
+            if (_pathView == "error" || _pathView.Contains("exam"))
+            {
+                UpdateTicketQuestionCounts();
+            }
         }
 
         public void GoBack() {
@@ -97,7 +104,32 @@ namespace Test1C.ViewModels
             }
         }
 
+        private string GetQuestionCountText(int count)
+        {
+            // Правила склонения:
+            // 1 вопрос
+            // 2, 3, 4 вопроса
+            // 5-20 вопросов
+            // 21 вопрос, 22-24 вопроса, 25-30 вопросов и т.д.
+            if (count % 10 == 1 && count % 100 != 11)
+                return $"{count} вопрос";
+            else if ((count % 10 >= 2 && count % 10 <= 4) && !(count % 100 >= 12 && count % 100 <= 14))
+                return $"{count} вопроса";
+            else
+                return $"{count} вопросов";
+        }
 
+        private void UpdateTicketQuestionCounts()
+        {
+            foreach (var ticket in ListTicket)
+            {
+                // Получаем вопросы для текущего билета
+                var questions = ParseQuestionsTicket(_filePath, ticket.Id);
+
+                // Обновляем количество вопросов с правильным склонением
+                ticket.QuestionCount = GetQuestionCountText(questions.Count);
+            }
+        }
         static List<QuestionModel> ParseQuestionsTicket(string filePath, int idTicket)
         {
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -161,6 +193,59 @@ namespace Test1C.ViewModels
             return questions;
         }
 
-       
+        public async void DelAllProgress()
+        {
+            var result = await MessageBoxManager.GetMessageBoxStandard(
+                "Подтверждение",
+                "Вы точно хотите удалить весь прогресс?",
+                ButtonEnum.YesNo
+            ).ShowAsync();
+
+            if (result != ButtonResult.Yes) return;
+
+            try
+            {
+                string filePath = Path.Combine(AppContext.BaseDirectory, "File", "Tems.txt");
+
+                if (File.Exists(filePath))
+                {
+                    // Читаем все строки файла
+                    var lines = await File.ReadAllLinesAsync(filePath);
+
+                    // Обновляем прогресс во всех строках (кроме первой - "ВСЕ ТЕМЫ")
+                    for (int i = 0; i < lines.Length; i++)
+                    {
+                        var parts = lines[i].Split(';');
+                        // Для остальных билетов ставим прогресс 0
+                        if (parts.Length >= 3) lines[i] = $"{parts[0]};{parts[1]};0;";
+                    }
+                    // Перезаписываем файл
+                    await File.WriteAllLinesAsync(filePath, lines, Encoding.UTF8);
+
+                    // Обновляем данные в ListTicket
+                    foreach (var ticket in ListTicket)
+                    {
+                        ticket.Percent = 0;
+                    }
+
+                    await MessageBoxManager.GetMessageBoxStandard(
+                        "Успешно",
+                        "Весь прогресс был сброшен",
+                        ButtonEnum.Ok
+                    ).ShowAsync();
+
+                    // Обновляем страницу
+                    MainWindowViewModel.Instance.PageContent = new ListTicket(ListTicket, Title, Description, _filePath, _pathView);
+                }
+            }
+            catch (Exception ex)
+            {
+                await MessageBoxManager.GetMessageBoxStandard(
+                    "Ошибка",
+                    $"Не удалось сбросить прогресс: {ex.Message}",
+                    ButtonEnum.Ok
+                ).ShowAsync();
+            }
+        }
     }
 }

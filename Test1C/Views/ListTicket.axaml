@@ -23,6 +23,11 @@
 					</StackPanel>
 				</StackPanel>
 			</Border>
+			<Button Command="{Binding DelAllProgress}" IsVisible="{Binding IsVisiblePercent}"  Width="30" Height="60" CornerRadius="7" Background="#30267D" BorderThickness="0" HorizontalAlignment="Stretch" >
+				<Button.Content>
+					<Image Source="avares://Test1C/Assets/BtnDelAll.png" Width="24" Height="24"/>
+				</Button.Content>
+			</Button>
 		</StackPanel>
 
 

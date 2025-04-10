@@ -3,20 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\user\\source\\repos\\Test1C\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\user\\source\\repos\\test1c\\test1c\\viewmodels\\listquestionsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\viewmodels\\listquestionsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\user\\source\\repos\\test1c\\test1c\\app.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
+      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\app.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\user\\source\\repos\\test1c\\test1c\\viewmodels\\listticketviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\viewmodels\\listticketviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\user\\source\\repos\\test1c\\test1c\\views\\listquestions.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
       "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\views\\listquestions.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\user\\source\\repos\\test1c\\test1c\\viewmodels\\menuviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\viewmodels\\menuviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\user\\source\\repos\\test1c\\test1c\\viewmodels\\listquestionsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\viewmodels\\listquestionsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\user\\source\\repos\\test1c\\test1c\\views\\listticket.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
+      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\views\\listticket.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\user\\source\\repos\\test1c\\test1c\\models\\ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\models\\ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\user\\source\\repos\\test1c\\test1c\\viewmodels\\menuviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\viewmodels\\menuviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,11 +38,48 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "App.axaml",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\App.axaml",
+              "RelativeDocumentMoniker": "Test1C\\App.axaml",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\App.axaml",
+              "RelativeToolTip": "Test1C\\App.axaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-10T08:33:40.262Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "ListTicketViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\ViewModels\\ListTicketViewModel.cs",
+              "RelativeDocumentMoniker": "Test1C\\ViewModels\\ListTicketViewModel.cs",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\ViewModels\\ListTicketViewModel.cs",
+              "RelativeToolTip": "Test1C\\ViewModels\\ListTicketViewModel.cs",
+              "ViewState": "AgIAAN4AAAAAAAAAAAAiwNwAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-10T07:54:36.33Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ListTicket.axaml",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\Views\\ListTicket.axaml",
+              "RelativeDocumentMoniker": "Test1C\\Views\\ListTicket.axaml",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\Views\\ListTicket.axaml",
+              "RelativeToolTip": "Test1C\\Views\\ListTicket.axaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-10T07:53:57.672Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "ListQuestions.axaml",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\Views\\ListQuestions.axaml",
               "RelativeDocumentMoniker": "Test1C\\Views\\ListQuestions.axaml",
@@ -42,7 +91,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Ticket.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\Models\\Ticket.cs",
               "RelativeDocumentMoniker": "Test1C\\Models\\Ticket.cs",
@@ -55,26 +104,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "ListQuestionsViewModel.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\ViewModels\\ListQuestionsViewModel.cs",
               "RelativeDocumentMoniker": "Test1C\\ViewModels\\ListQuestionsViewModel.cs",
-              "ToolTip": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\ViewModels\\ListQuestionsViewModel.cs*",
-              "RelativeToolTip": "Test1C\\ViewModels\\ListQuestionsViewModel.cs*",
-              "ViewState": "AgIAAH4BAAAAAAAAAAAAAN4BAAAJAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\ViewModels\\ListQuestionsViewModel.cs",
+              "RelativeToolTip": "Test1C\\ViewModels\\ListQuestionsViewModel.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAgwDgAAAB2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-10T06:20:25.678Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "MenuViewModel.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\ViewModels\\MenuViewModel.cs",
               "RelativeDocumentMoniker": "Test1C\\ViewModels\\MenuViewModel.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Test1C\\Test1C\\ViewModels\\MenuViewModel.cs",
               "RelativeToolTip": "Test1C\\ViewModels\\MenuViewModel.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAAADgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAAAC8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-08T08:29:28.754Z",
               "EditorCaption": ""

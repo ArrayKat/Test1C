@@ -12,17 +12,17 @@
 		<image:ImageConverter x:Key="ImageConv"></image:ImageConverter>
 	</UserControl.Resources>
 	
-	<Grid ColumnDefinitions="*, 10*" MaxWidth="1200">
+	<Grid ColumnDefinitions="*, 10*" MaxWidth="1000">
 		<ListBox ItemsSource="{Binding NumberQuestion}" SelectedItem="{Binding SelectedNumber}" Grid.Column="0" HorizontalAlignment="Stretch"/>
 		
-		<Grid RowDefinitions="*, 7*" Margin="20" HorizontalAlignment="Center" Grid.Column="1">
+		<Grid RowDefinitions="*, 7*" Margin="20"  Grid.Column="1">
 			<StackPanel Grid.Row="0" Orientation="Horizontal">
 				<Button Command="{Binding GoBack}"  Width="30" Height="60" CornerRadius="7" Background="#30267D" BorderThickness="0" HorizontalAlignment="Left" >
 					<Button.Content>
 						<Image Source="avares://Test1C/Assets/BtnBack.png" Width="24" Height="24"/>
 					</Button.Content>
 				</Button>
-				<Border BorderBrush="#30267D" BorderThickness="2" CornerRadius="7" Margin="0 10 0 0" Width="900" >
+				<Border BorderBrush="#30267D" BorderThickness="2" CornerRadius="7" Margin="0 10 0 0" Width="900"  HorizontalAlignment="Stretch">
 					<StackPanel Orientation="Horizontal" Height="60">
 						<Image Source="avares://Test1C/Assets/icon.png" Width="120" Height="50" Margin="5"/>
 						<StackPanel Orientation="Vertical" >
