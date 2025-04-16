@@ -27,6 +27,7 @@ namespace Test1C.ViewModels
         public List<Answer> Answers => _model.Answers;
         public int CorrectAnswer => _model.CorrectAnswer;
         public string ImagePath => _model.ImagePath;
+        
         // UI-специфичные свойства
         private bool _isVisibleCorrectAnswer;
         public bool IsVisibleCorrectAnswer
@@ -34,7 +35,7 @@ namespace Test1C.ViewModels
             get => _isVisibleCorrectAnswer;
             set => this.RaiseAndSetIfChanged(ref _isVisibleCorrectAnswer, value);
         }
-
+        public string QuestionGroup => $"Group_{Id}";
         private string _colorBorder = "Transparent";
         public string ColorBorder
         {

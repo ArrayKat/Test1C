@@ -11,23 +11,26 @@ using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Avalonia;
 using CsvHelper;
 using CsvHelper.Configuration;
 using DynamicData.Kernel;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
 using ReactiveUI;
+using Test1C;
 using Test1C.Models;
+using Test1C.ViewModels;
 
 namespace Test1C.ViewModels
 {
     public class ListQuestionsViewModel : ViewModelBase
     {
-        private readonly string _title;
-        private readonly string _description;
         private readonly List<Ticket> _listTicket;
         private readonly string _filePath;
-        string _pathView;
+        private readonly string _pathView;
+        private string _title;
+        private string _description;
 
         public ObservableCollection<QuestionViewModel> Questions { get; }
         public ObservableCollection<string> NumberQuestion { get; }
@@ -53,119 +56,182 @@ namespace Test1C.ViewModels
             set => this.RaiseAndSetIfChanged(ref _textResult, value);
         }
 
-        bool _isVisibleDel;
-        public bool IsVisibleDel { get => _isVisibleDel; set => this.RaiseAndSetIfChanged(ref _isVisibleDel, value); }
+        public bool IsVisibleDel { get; }
         public ReactiveCommand<QuestionViewModel, Unit> CheckAnswersCommand { get; }
+        public string Title
+        {
+            get => _title;
+            set => this.RaiseAndSetIfChanged(ref _title, value);
+        }
 
-        string title;
-        public string Title { get => title; set => this.RaiseAndSetIfChanged( ref title, value); }
+        public string Description
+        {
+            get => _description;
+            set => this.RaiseAndSetIfChanged(ref _description, value);
+        }
 
-        string description;
-        public string Description { get => description; set => this.RaiseAndSetIfChanged(ref description, value); }
-
-        public ListQuestionsViewModel(List<Ticket> list, string title, string desc, List<QuestionModel> questions, string filePath, string path)
+        public ListQuestionsViewModel(List<Ticket> list, string title, string desc,
+            List<QuestionModel> questions, string filePath, string path)
         {
             _listTicket = list;
-            _description = desc;
-            _title = title;
             _filePath = filePath;
             _pathView = path;
+            _title = title;
+            _description = desc;
 
+            // Инициализация заголовка и описания
+            InitializeTitleAndDescription(questions);
+            IsVisibleDel = path == "error";
 
-            string teme = "По всем темам";
-            string countTeme = "961 вопрос";
-            int countQ = 0;
+            // Инициализация вопросов
+            Questions = new ObservableCollection<QuestionViewModel>(
+                questions.Select(q => new QuestionViewModel(q)));
 
-            if (list != null && questions != null && questions.Any())
-            {
-                var numTeme = questions.First().TicketNumber;
-                var ticket = list.FirstOrDefault(x => x.Id == numTeme);
+            // Инициализация номеров вопросов
+            NumberQuestion = InitializeQuestionNumbers();
 
-                teme = ticket?.Title ?? "По всем темам";
-                countQ = questions.Count;
-                countTeme = ticket?.QuestionCount ?? "961 вопрос";
-            }
+            // Настройка синхронизации выбранного элемента
+            SetupSelectionSync();
 
-            switch (_pathView) {
-                case "marathon": Title = "Марафон по всем билетам"; Description = "961 вопрос"; break;
-                case "exam/teme": Title = teme; Description = "14 вопросов"; break;
-                case "exam/all": Title = "Экзамен по всем билетам"; Description = "14 вопросов"; break;
-                case "error": Title = teme; Description = $"{countQ} вопросов"; break;
-                case "teme": Title = teme;  Description = countTeme;  break;
-            }
-            
-            IsVisibleDel = path == "error" ? true : false;
-
-
-            if (_pathView == "marathon")
-            {
-                Questions = new ObservableCollection<QuestionViewModel>(
-                    questions.Select(q => new QuestionViewModel(q)));
-
-                NumberQuestion = new ObservableCollection<string>(
-                    Enumerable.Range(1, Questions.Count).Select(i => i.ToString()));
-
-                this.WhenAnyValue(x => x.SelectedNumber)
-                    .Where(number => number > 0 && number <= Questions.Count)
-                    .Subscribe(number =>
-                    {
-                        SelectedQuestion = Questions[number - 1];  // Индексация с 0
-                    });
-
-                this.WhenAnyValue(x => x.SelectedQuestion)
-                    .Where(question => question != null)
-                    .Subscribe(question =>
-                    {
-                        SelectedNumber = Questions.IndexOf(question) + 1;
-                    });
-            }
-            else if (_pathView == "exam/all")
-            {
-                Questions = new ObservableCollection<QuestionViewModel>(questions.Select(q => new QuestionViewModel(q)).OrderBy(x => x.TicketNumber));
-                NumberQuestion = new ObservableCollection<string>(Questions.Select(q => $"{q.TicketNumber}"));
-
-                // Синхронизация выбранного элемента
-                this.WhenAnyValue(x => x.SelectedNumber)
-                    .Where(number => number > 0)
-                    .Subscribe(number =>
-                    {
-                        SelectedQuestion = Questions.FirstOrDefault(q => q.TicketNumber == number);
-                    });
-
-                this.WhenAnyValue(x => x.SelectedQuestion)
-                    .Where(question => question != null)
-                    .Subscribe(question =>
-                    {
-                        SelectedNumber = question.TicketNumber;
-                    });
-
-            }
-            else {
-                Questions = new ObservableCollection<QuestionViewModel>(questions.Select(q => new QuestionViewModel(q)).OrderBy(x => x.QuestionNumber));
-                NumberQuestion = new ObservableCollection<string>(Questions.Select(q => $"{q.QuestionNumber}"));
-
-                // Синхронизация выбранного элемента
-                this.WhenAnyValue(x => x.SelectedNumber)
-                    .Where(number => number > 0)
-                    .Subscribe(number =>
-                    {
-                        SelectedQuestion = Questions.FirstOrDefault(q => q.QuestionNumber == number);
-                    });
-
-                this.WhenAnyValue(x => x.SelectedQuestion)
-                    .Where(question => question != null)
-                    .Subscribe(question =>
-                    {
-                        SelectedNumber = question.QuestionNumber;
-                    });
-            }
             CheckAnswersCommand = ReactiveCommand.Create<QuestionViewModel>(CheckAnswers);
         }
 
+        private void InitializeTitleAndDescription(List<QuestionModel> questions)
+        {
+            if (_listTicket == null || !questions.Any()) return;
+
+            var ticket = _listTicket.FirstOrDefault(x => x.Id == questions.First().TicketNumber);
+            var teme = ticket?.Title ?? "По всем темам";
+            var countQ = questions.Count;
+            var countTeme = ticket?.QuestionCount ?? "961 вопрос";
+
+            switch (_pathView)
+            {
+                case "marathon":
+                    Title = "Марафон по всем билетам";
+                    Description = "961 вопрос";
+                    break;
+                case "exam/teme":
+                    Title = teme;
+                    Description = "14 вопросов";
+                    break;
+                case "exam/all":
+                    Title = "Экзамен по всем билетам";
+                    Description = "14 вопросов";
+                    break;
+                case "error":
+                    Title = teme;
+                    Description = $"{countQ} вопросов";
+                    break;
+                case "teme":
+                    Title = teme;
+                    Description = countTeme;
+                    break;
+            }
+        }
+
+        private ObservableCollection<string> InitializeQuestionNumbers()
+        {
+            if (_pathView == "marathon")
+            {
+                return new ObservableCollection<string>(
+                    Enumerable.Range(1, Questions.Count).Select(i => i.ToString()));
+            }
+            else if (_pathView == "exam/all")
+            {
+                return new ObservableCollection<string>(
+                    Questions.OrderBy(x => x.TicketNumber).Select(q => $"{q.TicketNumber}"));
+            }
+            else
+            {
+                return new ObservableCollection<string>(
+                    Questions.OrderBy(x => x.QuestionNumber).Select(q => $"{q.QuestionNumber}"));
+            }
+        }
+
+        private void SetupSelectionSync()
+        {
+            this.WhenAnyValue(x => x.SelectedNumber)
+                .Where(number => number > 0)
+                .Subscribe(number =>
+                {
+                    if (_pathView == "marathon" && number <= Questions.Count)
+                    {
+                        SelectedQuestion = Questions[number - 1];
+                    }
+                    else if (_pathView == "exam/all")
+                    {
+                        SelectedQuestion = Questions.FirstOrDefault(q => q.TicketNumber == number);
+                    }
+                    else
+                    {
+                        SelectedQuestion = Questions.FirstOrDefault(q => q.QuestionNumber == number);
+                    }
+                });
+
+            this.WhenAnyValue(x => x.SelectedQuestion)
+                .Where(question => question != null)
+                .Subscribe(question =>
+                {
+                    if (_pathView == "marathon")
+                    {
+                        SelectedNumber = Questions.IndexOf(question) + 1;
+                    }
+                    else if (_pathView == "exam/all")
+                    {
+                        SelectedNumber = question.TicketNumber;
+                    }
+                    else
+                    {
+                        SelectedNumber = question.QuestionNumber;
+                    }
+                });
+        }
+        private void SetupSelectionSync(ObservableCollection<QuestionViewModel> questions, string path)
+        {
+            this.WhenAnyValue(x => x.SelectedNumber)
+                .Where(number => number > 0)
+                .Subscribe(number =>
+                {
+                    SelectedQuestion = path switch
+                    {
+                        "marathon" when number <= questions.Count => questions[number - 1],
+                        "exam/all" => questions.FirstOrDefault(q => q.TicketNumber == number),
+                        _ => questions.FirstOrDefault(q => q.QuestionNumber == number)
+                    };
+                });
+
+            this.WhenAnyValue(x => x.SelectedQuestion)
+                .Where(question => question != null)
+                .Subscribe(question =>
+                {
+                    SelectedNumber = path switch
+                    {
+                        "marathon" => questions.IndexOf(question) + 1,
+                        "exam/all" => question.TicketNumber,
+                        _ => question.QuestionNumber
+                    };
+                });
+        }
+
+        public void CheckAnswers(QuestionViewModel question)
+        {
+            if (question == null) return;
+
+            var selectedAnswer = question.Answers.FirstOrDefault(x => x.IsChecked);
+            bool isCorrect = question.CorrectAnswer == selectedAnswer?.Number;
+
+            question.IsVisibleCorrectAnswer = !isCorrect; // Всегда показывать правильный ответ после проверки
+            question.ColorBorder = isCorrect ? "#1CE942" : "#FF1E1E";
+            TextResult = isCorrect ? "✓ Правильно" : "✗ Неправильно";
+        }
+
+        // Остальные методы (GoBack, SaveErrorsToCsv и т.д.) остаются без изменений
+
         public async Task GoBack()
         {
-            
-            if(_pathView == null || !_pathView.Contains("exam"))
+
+            if (_pathView == null || !_pathView.Contains("exam") || _pathView == "error")
             {
                 List<QuestionViewModel> list = Questions.Where(x => x.ColorBorder == "#FF1E1E").ToList();
 
@@ -189,7 +255,12 @@ namespace Test1C.ViewModels
                 int countError = Questions.Where(x => x.ColorBorder == "#FF1E1E").Count();
                 int countSuccess = Questions.Where(x => x.ColorBorder == "#1CE942").Count();
                 if (countError + countSuccess != 14)
-                    MessageBoxManager.GetMessageBoxStandard("Уведомление", "Вы прошли не все вопросы, пройдите все вопросы в режиме экзамена", ButtonEnum.Ok, Icon.Warning).ShowAsync();
+                {
+                    var result = await MessageBoxManager.GetMessageBoxStandard("Уведомление", "Вы точно хотите выйти без сохранения?", ButtonEnum.YesNo, Icon.Warning).ShowAsync();
+                    if (result == ButtonResult.Yes) {
+                        MainWindowViewModel.Instance.PageContent = new Menu();
+                    }
+                }
                 else
                 {
                     int total = Questions.Count;
@@ -198,7 +269,8 @@ namespace Test1C.ViewModels
                     var ticket = _listTicket.FirstOrDefault(x => x.Id == Questions.First().TicketNumber);
 
                     if (_pathView == "exam/all") ticket = _listTicket.First();
-                    if (ticket != null && ticket.Percent < percentage) {
+                    if (ticket != null && ticket.Percent < percentage)
+                    {
                         ticket.Percent = percentage;
                         await UpdateTicketsFile(ticket);
                     }
@@ -355,7 +427,7 @@ namespace Test1C.ViewModels
 
                 await MessageBoxManager.GetMessageBoxStandard(
                     "Сохранено",
-                    $"Добавлено {uniqueNewErrors.Count} новых ошибок. Всего ошибок: {existingErrorIds.Count + uniqueNewErrors.Count}",
+                    $"Добавлено {uniqueNewErrors.Count} новых ошибок.",
                     ButtonEnum.Ok
                 ).ShowAsync();
             }
@@ -367,17 +439,6 @@ namespace Test1C.ViewModels
                     ButtonEnum.Ok
                 ).ShowAsync();
             }
-        }
-        public void CheckAnswers(QuestionViewModel question)
-        {
-            if (question == null) return;
-
-            var answerChecked = question.Answers.FirstOrDefault(x => x.IsChecked == true);
-            bool isCorrect = question.CorrectAnswer == answerChecked?.Number;
-
-            question.IsVisibleCorrectAnswer = !isCorrect;
-            question.ColorBorder = isCorrect ? "#1CE942" : "#FF1E1E";
-            TextResult = isCorrect ? "✓ Правильно" : "✗ Неправильно";
         }
 
         public async Task DelQuestions(QuestionViewModel question)
@@ -550,3 +611,5 @@ namespace Test1C.ViewModels
         }
     }
 }
+
+

@@ -38,9 +38,7 @@
 				</Button>
 			</StackPanel>
 
-			<ListBox ItemsSource="{Binding Questions}"
-				 SelectedItem="{Binding SelectedQuestion}"
-				 ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="1">
+			<ListBox ItemsSource="{Binding Questions}" SelectedItem="{Binding SelectedQuestion}" Grid.Row="1">
 				<ListBox.ItemTemplate>
 					<DataTemplate>
 						<Border Background="#F99D20" BorderBrush="{Binding ColorBorder}" BorderThickness="4" CornerRadius="7" >
@@ -59,8 +57,8 @@
 								</Grid>
 								
 								<Image Source="{Binding ImagePath, Converter={StaticResource ImageConv}}" Height="300" IsVisible="{Binding ImagePath, Converter={x:Static ObjectConverters.IsNotNull}}"/>
-								
-								<ItemsControl  ItemsSource="{Binding Answers}">
+
+								<ItemsControl ItemsSource="{Binding Answers}">
 									<ItemsControl.ItemTemplate>
 										<DataTemplate>
 											<RadioButton Foreground="Black" GroupName="{Binding QuestionGroupe}"  Content="{Binding TextAns}" IsChecked="{Binding IsChecked}">
@@ -72,11 +70,11 @@
 											</RadioButton>
 										</DataTemplate>
 									</ItemsControl.ItemTemplate>
-								</ItemsControl >
+								</ItemsControl>
 
-								<Grid ColumnDefinitions="5*, *">
+								<Grid ColumnDefinitions="5*, 2*">
 									<Button Content="Проверить" Command="{Binding $parent[UserControl].((vm:ListQuestionsViewModel)DataContext).CheckAnswers}" CommandParameter="{Binding}" Classes="check" Grid.Column="0"/>
-									<TextBlock Text="{Binding CorrectAnswer, StringFormat='Правильный ответ: {0}'}" IsVisible="{Binding IsVisibleCorrectAnswer}" FontWeight="Bold" HorizontalAlignment="Right" Margin="17" Grid.Column="1"/>
+									<TextBlock Text="{Binding CorrectAnswer, StringFormat=' Правильный ответ: {0}'}" IsVisible="{Binding IsVisibleCorrectAnswer}" FontWeight="Bold" HorizontalAlignment="Right" Margin="17" Grid.Column="1" Foreground="Black"/>
 								</Grid>
 							</StackPanel>
 						</Border>

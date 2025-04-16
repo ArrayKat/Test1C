@@ -22,7 +22,7 @@ namespace Test1C.ViewModels
 
         public void GoMarathon() {
             _questions = ParseQuestions("File/read1.csv");
-            MainWindowViewModel.Instance.PageContent = new ListQuestions(null, null, null, _questions, "File/read1.csv", "marathon");
+            MainWindowViewModel.Instance.PageContent = new ListQuestions(null, "МАРАФОН по всем вопросам", "961 вопрос", _questions, "File/read1.csv", "marathon");
         }
         public void GoTems() {
             ParceFromTeme("File/Tems.txt");
@@ -128,7 +128,9 @@ namespace Test1C.ViewModels
                                 Answer tmp = new Answer()
                                 {
                                     Number = i - 5,
-                                    TextAns = record[i].Trim()
+                                    TextAns = record[i].Trim(),
+                                    QuestionGroupe = $"{record[1]}-{record[2]}",
+                                    IsChecked = false
                                 };
                                 question.Answers.Add(tmp);
                             }

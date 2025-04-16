@@ -18,5 +18,7 @@ namespace Test1C.Models
         public string QuestionText { get; set; }    // Текст вопроса
         public List<Answer> Answers { get; set; }   // Список ответов
 
+
+
     }
 }
