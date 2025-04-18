@@ -7,48 +7,8 @@
       "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\viewmodels\\menuviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\katya\\source\\repos\\test1c\\test1c\\models\\questionmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\models\\questionmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\katya\\source\\repos\\test1c\\test1c\\views\\mainwindow.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
-      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\views\\mainwindow.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\katya\\source\\repos\\test1c\\test1c\\viewlocator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\viewlocator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\katya\\source\\repos\\test1c\\test1c\\app.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
-      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\app.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\katya\\source\\repos\\test1c\\test1c\\app.manifest||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\app.manifest||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\katya\\source\\repos\\test1c\\test1c\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\katya\\source\\repos\\test1c\\test1c\\viewmodels\\listquestionsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\viewmodels\\listquestionsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\katya\\source\\repos\\test1c\\test1c\\views\\listquestions.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
-      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\views\\listquestions.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\katya\\source\\repos\\test1c\\test1c\\viewmodels\\questionviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\viewmodels\\questionviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\katya\\source\\repos\\test1c\\test1c\\viewmodels\\listticketviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\viewmodels\\listticketviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|c:\\users\\katya\\source\\repos\\test1c\\test1c\\models\\answer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E61F3325-A7D0-4BFA-A44D-7B888D90F145}|Test1C\\Test1C.csproj|solutionrelative:test1c\\models\\answer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 16,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -82,155 +42,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MainWindow.axaml",
-              "DocumentMoniker": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\Views\\MainWindow.axaml",
-              "RelativeDocumentMoniker": "Test1C\\Views\\MainWindow.axaml",
-              "ToolTip": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\Views\\MainWindow.axaml",
-              "RelativeToolTip": "Test1C\\Views\\MainWindow.axaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-16T20:29:06.182Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ViewLocator.cs",
-              "DocumentMoniker": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\ViewLocator.cs",
-              "RelativeDocumentMoniker": "Test1C\\ViewLocator.cs",
-              "ToolTip": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\ViewLocator.cs",
-              "RelativeToolTip": "Test1C\\ViewLocator.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-16T20:28:48.516Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "app.manifest",
-              "DocumentMoniker": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\app.manifest",
-              "RelativeDocumentMoniker": "Test1C\\app.manifest",
-              "ToolTip": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\app.manifest",
-              "RelativeToolTip": "Test1C\\app.manifest",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001203|",
-              "WhenOpened": "2025-04-16T20:28:37.914Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\Program.cs",
-              "RelativeDocumentMoniker": "Test1C\\Program.cs",
-              "ToolTip": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\Program.cs",
-              "RelativeToolTip": "Test1C\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-16T20:28:34.338Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "QuestionViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\ViewModels\\QuestionViewModel.cs",
-              "RelativeDocumentMoniker": "Test1C\\ViewModels\\QuestionViewModel.cs",
-              "ToolTip": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\ViewModels\\QuestionViewModel.cs",
-              "RelativeToolTip": "Test1C\\ViewModels\\QuestionViewModel.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAgwCAAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-16T20:17:04.872Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "QuestionModel.cs",
-              "DocumentMoniker": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\Models\\QuestionModel.cs",
-              "RelativeDocumentMoniker": "Test1C\\Models\\QuestionModel.cs",
-              "ToolTip": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\Models\\QuestionModel.cs",
-              "RelativeToolTip": "Test1C\\Models\\QuestionModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-16T20:16:50.932Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "App.axaml",
-              "DocumentMoniker": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\App.axaml",
-              "RelativeDocumentMoniker": "Test1C\\App.axaml",
-              "ToolTip": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\App.axaml",
-              "RelativeToolTip": "Test1C\\App.axaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-16T20:14:54.945Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ListQuestions.axaml",
-              "DocumentMoniker": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\Views\\ListQuestions.axaml",
-              "RelativeDocumentMoniker": "Test1C\\Views\\ListQuestions.axaml",
-              "ToolTip": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\Views\\ListQuestions.axaml",
-              "RelativeToolTip": "Test1C\\Views\\ListQuestions.axaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-16T17:55:59.181Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ListTicketViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\ViewModels\\ListTicketViewModel.cs",
-              "RelativeDocumentMoniker": "Test1C\\ViewModels\\ListTicketViewModel.cs",
-              "ToolTip": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\ViewModels\\ListTicketViewModel.cs",
-              "RelativeToolTip": "Test1C\\ViewModels\\ListTicketViewModel.cs",
-              "ViewState": "AgIAAJMAAAAAAAAAAAAuwLUAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-16T17:52:16.746Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ListQuestionsViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\ViewModels\\ListQuestionsViewModel.cs",
-              "RelativeDocumentMoniker": "Test1C\\ViewModels\\ListQuestionsViewModel.cs",
-              "ToolTip": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\ViewModels\\ListQuestionsViewModel.cs",
-              "RelativeToolTip": "Test1C\\ViewModels\\ListQuestionsViewModel.cs",
-              "ViewState": "AgIAAK0BAAAAAAAAAAAmwK0BAABFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-16T17:52:10.15Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Answer.cs",
-              "DocumentMoniker": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\Models\\Answer.cs",
-              "RelativeDocumentMoniker": "Test1C\\Models\\Answer.cs",
-              "ToolTip": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\Models\\Answer.cs",
-              "RelativeToolTip": "Test1C\\Models\\Answer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-16T17:51:12.682Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "MenuViewModel.cs",
               "DocumentMoniker": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\ViewModels\\MenuViewModel.cs",
               "RelativeDocumentMoniker": "Test1C\\ViewModels\\MenuViewModel.cs",
               "ToolTip": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\ViewModels\\MenuViewModel.cs",
               "RelativeToolTip": "Test1C\\ViewModels\\MenuViewModel.cs",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAuwBsAAAArAAAAAAAAAA==",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAnwGUAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-16T17:50:13.999Z",
+              "WhenOpened": "2025-04-17T19:00:15.013Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ListQuestionsViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\ViewModels\\ListQuestionsViewModel.cs",
+              "RelativeDocumentMoniker": "Test1C\\ViewModels\\ListQuestionsViewModel.cs",
+              "ToolTip": "C:\\Users\\Katya\\source\\repos\\Test1C\\Test1C\\ViewModels\\ListQuestionsViewModel.cs",
+              "RelativeToolTip": "Test1C\\ViewModels\\ListQuestionsViewModel.cs",
+              "ViewState": "AgIAAJcAAAAAAAAAAAAswGICAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-17T16:56:34.171Z",
               "EditorCaption": ""
             }
           ]
